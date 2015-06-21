@@ -6,6 +6,7 @@ private:
 	ZeroFont* m_pFont_1;
 	ZeroFont* m_pFont_2;
 	ZeroFont* m_pFont_3;
+	ZeroFont* m_pFont_4;
 public:
 	FontExample();
 	~FontExample();
