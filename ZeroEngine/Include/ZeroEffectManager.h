@@ -1,22 +1,27 @@
 ﻿#pragma once
-#include "ZeroIEffect.h"
+
 #include <list>
-using namespace std;
+#include "ZeroIEffect.h"
+
+#pragma warning(disable: 4996)
 
 #define ZeroEffectMgr ZeroEffectManager::Instance()
 
-class ZeroEffectManager{
+using namespace std;
+
+class ZeroEffectManager {
 private:
+	ZeroEffectManager();
+
 	typedef list<ZeroIEffect*> EFFECTLIST;
 	EFFECTLIST m_Effects;
 
-	ZeroEffectManager();
 public:
 	~ZeroEffectManager();
 
 	static ZeroEffectManager* Instance();
 
-	void PushEffect(ZeroIEffect* p,ZeroVec pos);
+	void PushEffect(ZeroIEffect* p, ZeroVec pos);
 	void PushEffect(ZeroIEffect* p);
 	void PopEffect(ZeroIEffect* p);
 	void Clear();

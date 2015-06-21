@@ -1,18 +1,20 @@
 ﻿#pragma once
-#include "ZeroIScene.h"
-#include "ZeroResource.h"
+
 #include <vector>
 #include <stdarg.h>
+#include "ZeroIScene.h"
+#include "ZeroResource.h"
 
-class ZeroLine : public ZeroIScene, public ZeroResource{
+class ZeroLine : public ZeroIScene, public ZeroResource {
 private:
 	typedef std::vector<ZeroVec> POINTLIST;
 	POINTLIST m_Points;
 
 	LPD3DXLINE m_pLine;
 	LPD3DXLINE m_pUtilLine;
-	float m_LineWidth ;
-	DWORD m_LinePattern ;
+	float m_LineWidth;
+	DWORD m_LinePattern;
+
 public:
 	ZeroLine();
 	~ZeroLine();
@@ -32,11 +34,11 @@ public:
 
 	//유틸리티 기능
 	void DrawRect(ZeroRect rect);
-	void DrawCircle(ZeroVec pos,float radius);
+	void DrawCircle(ZeroVec pos, float radius);
 
 	void Update(float eTime);
 	void Render();
 
 private:
-	void ReloadResource() ;
+	void ReloadResource();
 };

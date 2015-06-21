@@ -1,13 +1,15 @@
 ﻿#pragma once
+
 #include "ZeroIScene.h"
 
 #define ZeroSceneMgr ZeroSceneManager::Instance()
 
-class ZeroSceneManager{
+class ZeroSceneManager {
 private:
+	ZeroSceneManager();
+
 	ZeroIScene *m_pNow;
 
-	ZeroSceneManager();
 public:
 	~ZeroSceneManager();
 
@@ -16,6 +18,6 @@ public:
 	void Update(float eTime);
 	void Render();
 
-	void ChangeScene(ZeroIScene *p,bool isErase=true);
+	void ChangeScene(ZeroIScene *p, bool isErase = true);
 	void Clear();
 };

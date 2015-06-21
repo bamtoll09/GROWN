@@ -9,10 +9,11 @@ enum {
 	SPRITEMGR_DARKEN,
 	SPRITEMGR_MOREDARKEN,
 };
-class ZeroSpriteManager{
+
+class ZeroSpriteManager {
 private:
 	LPD3DXSPRITE m_pSprite;
-	
+
 	ZeroSpriteManager();
 public:
 	~ZeroSpriteManager();
@@ -23,5 +24,5 @@ public:
 
 	void ShutdownSprite();
 	void InitSprite();
-	void ReloadResource() ;
+	void ReloadResource();
 };

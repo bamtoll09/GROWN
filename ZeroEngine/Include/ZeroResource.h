@@ -1,13 +1,12 @@
 ﻿#pragma once
 
-class ZeroResource
-{
+class ZeroResource {
 public:
-	ZeroResource() ;
-	~ZeroResource() ;
+	ZeroResource();
+	~ZeroResource();
 
 public:
-	virtual void ReloadResource() ;
-	virtual void OnPrevDeviceReset() ;
-	virtual void OnPostDeviceReset() ;
-} ;
+	virtual void ReloadResource();
+	virtual void OnPrevDeviceReset();
+	virtual void OnPostDeviceReset();
+};

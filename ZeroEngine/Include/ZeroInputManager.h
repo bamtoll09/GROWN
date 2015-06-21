@@ -1,4 +1,5 @@
 ﻿#pragma once
+
 #include "DXUT.h"
 #include "ZeroVec.h"
 #include "ZeroRect.h"
@@ -16,15 +17,16 @@ enum {
 	INPUTMGR_WHEELUP,
 };
 
-class ZeroInputManager{
+class ZeroInputManager {
 private:
+	ZeroInputManager();
+
 	bool m_bPreviousKey[256];
 	bool m_bCurrentKey[256];
 	bool m_bLockKey[256];
 
 	int m_iWheel;
 
-	ZeroInputManager();
 public:
 	~ZeroInputManager();
 

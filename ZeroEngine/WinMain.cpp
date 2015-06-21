@@ -2,6 +2,8 @@
 #include "Zero.h"
 #include "Examples.h"
 
+#pragma comment(lib, "comctl32")
+
 //이 변수를 주석처리 해버리면 콘솔창 안뜬다.
 ZeroConsole g_Console;
 

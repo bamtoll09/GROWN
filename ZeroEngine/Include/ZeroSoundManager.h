@@ -1,26 +1,29 @@
 ﻿#pragma once
-#include "SDKSound.h"
+
 #include <map>
 #include <string>
 #include <stdarg.h>
+#include "SDKSound.h"
+
 using namespace std;
 
 #define ZeroSoundMgr ZeroSoundManager::Instance()
 
-class ZeroSoundManager{
+class ZeroSoundManager {
 private:
-	typedef map<string,CSound*> SOUND;
+	ZeroSoundManager();
+
+	typedef map<string, CSound*> SOUND;
 	SOUND m_Sounds;
 
 	CSoundManager m_SndMgr;
-	ZeroSoundManager();
+
 public:
-	
 	~ZeroSoundManager();
 
 	static ZeroSoundManager* Instance();
 
-	void PushSound(LPWSTR filepath,char* name, ...);
+	void PushSound(LPWSTR filepath, char* name, ...);
 	void PopSound(char* name, ...);
 
 	void Play(char* name, ...);

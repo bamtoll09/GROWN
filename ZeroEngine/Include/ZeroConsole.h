@@ -1,23 +1,24 @@
 ﻿#pragma once
+
 #include "DXUT.h"
 #include <io.h>
 #include <fcntl.h>
 
-class ZeroConsole{
+class ZeroConsole {
 public:
-		ZeroConsole(){
+	ZeroConsole() {
 		int hCrt;
 		FILE *hf;
 
 		AllocConsole();
 
-		hCrt = _open_osfhandle((long)GetStdHandle(STD_OUTPUT_HANDLE),_O_TEXT);
-		hf = _fdopen(hCrt,"w");
+		hCrt = _open_osfhandle((long) GetStdHandle(STD_OUTPUT_HANDLE), _O_TEXT);
+		hf = _fdopen(hCrt, "w");
 
 		*stdout = *hf;
-		setvbuf(stdout,NULL,_IONBF,0);
+		setvbuf(stdout, NULL, _IONBF, 0);
 	}
-	~ZeroConsole(){
+	~ZeroConsole() {
 		_fcloseall();
 		FreeConsole();
 	}

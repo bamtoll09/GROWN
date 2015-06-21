@@ -1,11 +1,13 @@
 ﻿#pragma once
-#include "ZeroSprite.h"
+
 #include <vector>
 #include <stdarg.h>
+#include "ZeroSprite.h"
 
 using namespace std;
 
-class ZeroAnimation : public ZeroIScene{
+class ZeroAnimation : public ZeroIScene {
+
 private:
 	float m_fFrame;
 	float m_fFrameSpeed;
@@ -14,9 +16,10 @@ private:
 	bool m_bStart;	//애니메이션 시작?정지?
 	bool m_bLoop;	//애니메이션 루프
 	vector<ZeroSprite*> m_Animates;
+
 public:
 	template <typename T>
-	ZeroAnimation(T speed,bool loop=true){
+	ZeroAnimation(T speed, bool loop = true) {
 		m_iMaxFrame = 0;
 		m_fFrameSpeed = static_cast<float>(speed);
 		m_fFrame = 0;
@@ -30,13 +33,22 @@ public:
 	void Stop();
 
 	template <typename T>
-	void SetFrameSpeed(T speed){m_fFrameSpeed = static_cast<float>(speed);}
+	void SetFrameSpeed(T speed) {
+		m_fFrameSpeed = static_cast<float>(speed);
+	}
 
 	template <typename T>
-	void SetFrame(T frame){m_fFrame = static_cast<float>(frame);}
-	float Frame()const{return m_fFrame;}
+	void SetFrame(T frame) {
+		m_fFrame = static_cast<float>(frame);
+	}
 
-	int MaxFrame()const{return m_iMaxFrame;}
+	float Frame() const {
+		return m_fFrame;
+	}
+
+	int MaxFrame() const {
+		return m_iMaxFrame;
+	}
 
 	void Update(float eTime);
 	void Render();
