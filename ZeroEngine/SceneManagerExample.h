@@ -4,6 +4,7 @@
 class SceneManagerExample : public ZeroIScene {
 private:
 	ZeroFont* m_pFont;
+	ZeroSprite* m_pSprite;
 public:
 	SceneManagerExample();
 	~SceneManagerExample();

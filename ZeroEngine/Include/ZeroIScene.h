@@ -1,15 +1,15 @@
 ﻿#pragma once
 
+#include <vector>
+#include "DXUT.h"
 #include "ZeroVec.h"
 #include "ZeroRect.h"
-#include <list>
-#include "DXUT.h"
 
 using namespace std;
 
 class ZeroIScene {
 protected:
-	typedef list<ZeroIScene*> NODE;
+	typedef vector<ZeroIScene*> NODE;
 	NODE m_Node;
 
 protected:

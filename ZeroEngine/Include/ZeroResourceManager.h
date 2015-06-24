@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include <list>
+#include <vector>
 
 class ZeroResource;
 
@@ -11,7 +11,7 @@ private:
 	ZeroResourceManager(void);
 	~ZeroResourceManager(void);
 
-	typedef std::list<ZeroResource*> ResourceList;
+	typedef std::vector<ZeroResource*> ResourceList;
 	ResourceList m_ResourceList;
 
 public:

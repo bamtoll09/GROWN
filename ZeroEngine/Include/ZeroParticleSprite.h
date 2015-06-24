@@ -1,12 +1,12 @@
 ﻿#pragma once
 
-#include <list>
+#include <vector>
 #include "ZeroIEffect.h"
 #include "ZeroIParticle.h"
 
 class ZeroParticleSprite : public ZeroIEffect {
 private:
-	typedef std::list< ZeroIParticle* > PARTICLE;
+	typedef std::vector< ZeroIParticle* > PARTICLE;
 	PARTICLE m_Particles;
 
 	int m_StartA, m_StartR, m_StartG, m_StartB;
