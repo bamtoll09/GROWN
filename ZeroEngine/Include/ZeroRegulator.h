@@ -22,7 +22,7 @@ public:
 
 	bool IsReady() {
 		if (m_fUpdatePeriod == 0) return true;
-		if (m_fUpdatePeriod <  0) return false;
+		if (m_fUpdatePeriod < 0) return false;
 
 		DWORD dwCurrentTime = timeGetTime();
 

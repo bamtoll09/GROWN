@@ -1,8 +1,8 @@
 ﻿#pragma once
 
-#include "DXUT.h"
 #include <io.h>
 #include <fcntl.h>
+#include "DXUT.h"
 
 class ZeroConsole {
 public:

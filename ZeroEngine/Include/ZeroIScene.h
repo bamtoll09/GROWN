@@ -39,7 +39,7 @@ protected:
 	//객체의 색깔을 나타내는 값이다.
 	//기본값 : 0xffffffff
 	//변환되기 전 컬러
-	DWORD m_ColorTemp;	
+	DWORD m_ColorTemp;
 
 	//객체의 색깔을 나타내는 값이다.
 	//기본값 : 0xffffffff

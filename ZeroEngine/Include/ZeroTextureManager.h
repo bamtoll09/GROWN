@@ -1,8 +1,8 @@
 ﻿#pragma once
 
-#include "DXUT.h"
 #include <map>
 #include <string>
+#include "DXUT.h"
 #include "ZeroResource.h"
 
 using namespace std;

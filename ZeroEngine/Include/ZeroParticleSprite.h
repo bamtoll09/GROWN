@@ -40,31 +40,31 @@ public:
 	void SetParticleColorStart(int a, int r, int g, int b) {
 		m_StartA = a, m_StartR = r, m_StartG = g, m_StartB = b;
 	}
-	
+
 	void SetParticleColorEnd(int a, int r, int g, int b) {
 		m_EndA = a, m_EndR = r, m_EndG = g, m_EndB = b;
 	}
-	
+
 	template <typename T, typename U>
 	void SetParticleSpeed(T minspeed, U maxspeed) {
 		m_fMinSpeed = static_cast<float>(minspeed); m_fMaxSpeed = static_cast<float>(maxspeed);
 	}
-	
+
 	template <typename T, typename U>
 	void SetParticleScale(T minscale, U maxscale) {
 		m_fMinScale = static_cast<float>(minscale); m_fMaxScale = static_cast<float>(maxscale);
 	}
-	
+
 	template <typename T, typename U>
 	void SetParticleLifeTime(T minlifetime, U maxlifetime) {
 		m_fMinLifeTime = static_cast<float>(minlifetime); m_fMaxLifeTime = static_cast<float>(maxlifetime);
 	}
-	
+
 	template <typename T>
 	void SetParticleDirection(T direction) {
 		m_fDirection = static_cast<float>(direction);
 	}
-	
+
 	template <typename T>
 	void SetParticleSpread(T spread) {
 		m_fSpread = static_cast<float>(spread);
