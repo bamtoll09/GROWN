@@ -1,7 +1,8 @@
 ﻿#pragma once
 
 #include <vector>
-#include "DXUT.h"
+#include <cassert>
+#include <d3d9.h>
 #include "ZeroVec.h"
 #include "ZeroRect.h"
 

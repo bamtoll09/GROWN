@@ -4,6 +4,10 @@
 #include "ZeroIEffect.h"
 #include "ZeroIParticle.h"
 
+#define SAFE_DELETE(p)       { if(p) { delete (p);     (p)=0; } }
+#define SAFE_DELETE_ARRAY(p) { if(p) { delete[] (p);   (p)=0; } }
+#define SAFE_RELEASE(p)      { if(p) { (p)->Release(); (p)=0; } }
+
 class ZeroParticleSprite : public ZeroIEffect {
 private:
 	typedef std::vector< ZeroIParticle* > PARTICLE;

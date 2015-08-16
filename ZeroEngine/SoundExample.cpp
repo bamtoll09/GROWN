@@ -6,7 +6,17 @@
 //
 /*--------------------------------------------------------------------------------*/
 SoundExample::SoundExample() {
-	ZeroSoundMgr->PushSound(L"Sound/Example.wav", "sound1");
+	ZeroSoundMgr->PushSound("Sound/Background.wav", "배경 음악");
+	ZeroSoundMgr->PushSound("Sound/Shotgun.mp3", "Shotgun");
+
+	// 동시에 재생 가능한 채널 수를 1로 고정한다. 기본 값 및 최대 값은 256이다.
+	ZeroSoundMgr->SetConcurrency(1, "배경 음악");
+
+	status = new ZeroFont(18, "스페이스 키를 누르면 샷건 효과음 재생\n"
+							  "Q 키로 BGM 재생\n"
+							  "W 키로 BGM 정지\n"
+							  "E 키로 BGM 다시 재생\n");
+	status->SetColor(0xff000000);
 }
 /*--------------------------------------------------------------------------------*/
 //
@@ -14,6 +24,7 @@ SoundExample::SoundExample() {
 //
 /*--------------------------------------------------------------------------------*/
 SoundExample::~SoundExample() {
+
 }
 /*--------------------------------------------------------------------------------*/
 //
@@ -21,19 +32,24 @@ SoundExample::~SoundExample() {
 //
 /*--------------------------------------------------------------------------------*/
 void SoundExample::Update(float eTime) {
+	status->Update(eTime);
 	ZeroIScene::Update(eTime);
 
-	//sound1 재생
+	// 샷건 효과음 재생
+	if (ZeroInputMgr->GetKey(' ') == INPUTMGR_KEYDOWN)
+		ZeroSoundMgr->Play("Shotgun");
+
+	// 배경 음악 재생
 	if (ZeroInputMgr->GetKey('Q') == INPUTMGR_KEYDOWN)
-		ZeroSoundMgr->Play("sound1");
+		ZeroSoundMgr->Play("배경 음악");
 
-	//sound1 일시정지
+	// 배경 음악 정지
 	if (ZeroInputMgr->GetKey('W') == INPUTMGR_KEYDOWN)
-		ZeroSoundMgr->Stop("sound1");
+		ZeroSoundMgr->Stop("배경 음악");
 
-	//sound1 사운드 처음으로 되돌리기
+	// 배경 음악 처음으로 되돌리기
 	if (ZeroInputMgr->GetKey('E') == INPUTMGR_KEYDOWN)
-		ZeroSoundMgr->Reset("sound1");
+		ZeroSoundMgr->Reset("배경 음악");
 }
 /*--------------------------------------------------------------------------------*/
 //
@@ -41,5 +57,6 @@ void SoundExample::Update(float eTime) {
 //
 /*--------------------------------------------------------------------------------*/
 void SoundExample::Render() {
+	status->Render();
 	ZeroIScene::Render();
 }
