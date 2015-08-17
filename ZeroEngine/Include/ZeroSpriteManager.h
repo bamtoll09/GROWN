@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "DXUT.h"
+#include <d3dx9.h>
 
 #define ZeroSpriteMgr ZeroSpriteManager::Instance()
 

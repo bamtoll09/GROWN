@@ -3,6 +3,7 @@
 
 class SoundExample : public ZeroIScene {
 private:
+	ZeroFont* status;
 public:
 	SoundExample();
 	~SoundExample();

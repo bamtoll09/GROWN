@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include <map>
-#include "DXUT.h"
+#include <d3dx9.h>
 
 using namespace std;
 

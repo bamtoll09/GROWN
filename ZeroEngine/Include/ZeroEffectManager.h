@@ -10,23 +10,23 @@
 using namespace std;
 
 class ZeroEffectManager {
+
 private:
 	ZeroEffectManager();
 
-	typedef list<ZeroIEffect*> EFFECTLIST;
-	EFFECTLIST m_Effects;
+	list<ZeroIEffect*> effectList;
 
 public:
 	~ZeroEffectManager();
 
 	static ZeroEffectManager* Instance();
 
-	void PushEffect(ZeroIEffect* p, ZeroVec pos);
-	void PushEffect(ZeroIEffect* p);
-	void PopEffect(ZeroIEffect* p);
+	void PushEffect(ZeroIEffect* _p, ZeroVec _pos);
+	void PushEffect(ZeroIEffect* _p);
+	void PopEffect(ZeroIEffect* _p);
 	void Clear();
 
-	void Update(float eTime);
-	void RenderPage(int page);
+	void Update(float _eTime);
+	void RenderPage(int _page);
 	void RenderPage();
 };

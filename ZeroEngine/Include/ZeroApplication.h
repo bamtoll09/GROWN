@@ -1,70 +1,63 @@
 ﻿#pragma once
 
-#include "DXUT.h"
+#include <d3d9.h>
 #include "ZeroRingBuffer.h"
 #include "ZeroProcessMonitor.h"
 #include "ZeroRegulator.h"
+#include <windows.h>
+
+#define SAFE_DELETE(p)       { if(p) { delete (p);     (p)=0; } }
+#define SAFE_DELETE_ARRAY(p) { if(p) { delete[] (p);   (p)=0; } }
+#define SAFE_RELEASE(p)      { if(p) { (p)->Release(); (p)=0; } }
 
 #define ZeroApp ZeroApplication::Instance()
 
 class ZeroApplication {
+
 private:
-	LPDIRECT3D9 m_pD3D;
-	LPDIRECT3DDEVICE9 m_pD3D9Device;
-	D3DPRESENT_PARAMETERS m_D3D9DeviceProperty;
+	ZeroApplication();
 
-	HWND m_Hwnd;
+	LPDIRECT3D9 D3D;
+	LPDIRECT3DDEVICE9 D3D9Device;
+	D3DPRESENT_PARAMETERS D3D9DeviceProperty;
+	HWND hWnd;
 
-	ZeroRingBuffer<LONGLONG, 10> m_Times;
-	ZeroProcessMonitor m_ProcessMonitor;
-	ZeroRegulator* m_pProcessCpuUsageRegulator;
-	ZeroRegulator* m_pProcessMemoryUsageRegulator;
+	ZeroRingBuffer<LONGLONG, 10> times;
+	ZeroProcessMonitor processMonitor;
+	ZeroRegulator* processCpuUsageRegulator;
+	ZeroRegulator* processMemoryUsageRegulator;
 
-	float m_fFPS;
-	float m_fMemoryUsage;
-	float m_fCpuUsage;
+	float fps;
+	float memoryUsage;
+	float cpuUsage;
 
-	int m_WindowWidth;
-	int m_WindowHeight;
+	int windowWidth;
+	int windowHeight;
 
 	bool CheckAndResetDevice();
 
-	ZeroApplication();
-
 public:
 	~ZeroApplication();
+	void Cleanup();
 
 	static ZeroApplication* Instance();
-
-	void RegisterWindowSize(int _iWindowWidth, int _iWindowHeight);
-	HRESULT InitD3D(HWND hWnd, bool _iIsFullScreen = false);
-	void Cleanup();
-	void Update(float eTime);
-	void Render();
-	static LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 	void CalculateFPS();
 	void CalculateMemoryUsage();
 	void CalculateCpuUsage();
-
-	void SetHwnd(HWND hwnd) {
-		m_Hwnd = hwnd;
-	}
-	HWND GetHwnd()const {
-		return m_Hwnd;
-	}
-	LPDIRECT3DDEVICE9 GetDevice()const {
-		return m_pD3D9Device;
-	}
-	float GetFPS()const {
-		return m_fFPS;
-	}
-	float GetMemoryUsage()const {
-		return m_fMemoryUsage;
-	}
-	float GetCpuUsage()const {
-		return m_fCpuUsage;
-	}
+	HWND GetHwnd() const;
+	void SetHwnd(HWND _hWnd);
+	LPDIRECT3DDEVICE9 GetDevice() const;
+	float GetFPS() const;
+	float GetMemoryUsage() const;
+	float GetCpuUsage() const;
 	int GetWindowWidth();
 	int GetWindowHeight();
+	void RegisterWindowSize(int _windowWidth, int _windowHeight);
+
+	void Update(float _eTime);
+	void Render();
+
+	static LRESULT WINAPI MsgProc(HWND _hWnd, UINT _msg, WPARAM _wParam, LPARAM _lParam);
+	HRESULT InitD3D(HWND _hWnd, bool _isFullScreen = false);
 };

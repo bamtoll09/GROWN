@@ -2,8 +2,8 @@
 
 #include <map>
 #include <string>
-#include "DXUT.h"
-#include "ZeroResource.h"
+#include <d3d9.h>
+#include <d3dx9core.h>
 
 using namespace std;
 

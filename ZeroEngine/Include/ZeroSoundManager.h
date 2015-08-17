@@ -1,32 +1,35 @@
 ﻿#pragma once
 
+#include <Windows.h>
+#include "fmod.hpp"
 #include <map>
-#include <string>
+#include <list>
+#include <tuple>
 #include <stdarg.h>
-#include "SDKSound.h"
-
-using namespace std;
 
 #define ZeroSoundMgr ZeroSoundManager::Instance()
 
 class ZeroSoundManager {
 private:
 	ZeroSoundManager();
-
-	typedef map<string, CSound*> SOUND;
-	SOUND m_Sounds;
-
-	CSoundManager m_SndMgr;
+	
+	FMOD::System *system;
+	std::map<std::string, std::tuple<FMOD::Sound*, std::list<FMOD::Channel*>, int>> soundList;
+	FMOD_RESULT result;
 
 public:
 	~ZeroSoundManager();
 
 	static ZeroSoundManager* Instance();
 
-	void PushSound(LPWSTR filepath, char* name, ...);
+	void Update(float _eTime);
+
+	void PushSound(char* filepath, char* name, ...);
 	void PopSound(char* name, ...);
 
-	void Play(char* name, ...);
+	void SetConcurrency(int _concurrency, char* _name, ...);
+
+	void Play(const char* name, ...);
 
 	void Stop();
 	void Stop(char* name, ...);

@@ -5,70 +5,66 @@
 #define ZeroCameraMgr ZeroCameraManager::Instance()
 
 class ZeroCameraManager {
+
 private:
-	ZeroVec m_vCameraPos;
-	ZeroIScene* m_pTarget;
+	ZeroVec currentPosition;
+	ZeroIScene* followingTarget;
 
-	bool m_bCamera;
+	bool isCameraEnabled;
 
-	//카메라 영역
-	int m_iWidth;
-	int m_iHeight;
+	// 카메라가 이동 가능한 위치는 (0, 0)부터 (mapWidth, mapHeight) 사이이다.
+	int mapWidth, mapHeight;
 
 	//싱글 톤
 	ZeroCameraManager();
+
 public:
 	~ZeroCameraManager();
 	static ZeroCameraManager* Instance();
 
 	void Update(float eTime);
 
-	bool IsCamera()const {
-		return m_bCamera;
-	}
-	void SetCameraOn() {
-		m_bCamera = true;
-	}
-	void SetCameraOff() {
-		m_bCamera = false;
-	}
-public:
-	ZeroVec Pos()const {
-		return m_vCameraPos;
-	}
-	void SetPos(ZeroVec pos) {
-		m_vCameraPos = pos;
-	}
-	template<typename T>
-	void SetPos(T x, T y) {
-		m_vCameraPos.x = static_cast<float>(x); m_vCameraPos.y = static_cast<float>(y);
-	}
+	bool IsCamera() const;
+	void SetCameraOn();
+	void SetCameraOff();
 
-	ZeroIScene* Target()const {
-		return m_pTarget;
-	}
-	void SetTarget(ZeroIScene *target) {
-		m_pTarget = target;
-	}
-
-	int Width()const {
-		return m_iWidth;
-	}
-	template<typename T>
-	void SetWidth(T width) {
-		m_iWidth = static_cast<int>(width);
-	}
-
-	int Height() const {
-		return m_iHeight;
-	}
-	template<typename T>
-	void SetHeight(T height) {
-		m_iHeight = static_cast<int>(height);
-	}
+	ZeroVec Pos() const;
+	void SetPos(ZeroVec pos);
 
 	template<typename T>
-	void SetScreen(T width, T height) {
-		m_iWidth = static_cast<int>(width); m_iHeight = static_cast<int>(height);
-	}
+	void SetPos(T x, T y);
+
+	ZeroIScene* Target() const;
+	void SetTarget(ZeroIScene* _target);
+
+	int Width() const;
+	template<typename T>
+	void SetWidth(T _mapWidth);
+
+	int Height() const;
+	template<typename T>
+	void SetHeight(T _mapHeight);
+
+	template<typename T>
+	void SetScreen(T _mapWidth, T _mapHeight);
 };
+
+template <typename T>
+void ZeroCameraManager::SetPos(T x, T y) {
+	currentPosition.x = static_cast<float>(x); currentPosition.y = static_cast<float>(y);
+}
+
+template <typename T>
+void ZeroCameraManager::SetWidth(T _mapWidth) {
+	mapWidth = static_cast<int>(_mapWidth);
+}
+
+template <typename T>
+void ZeroCameraManager::SetHeight(T _mapHeight) {
+	mapHeight = static_cast<int>(_mapHeight);
+}
+
+template <typename T>
+void ZeroCameraManager::SetScreen(T _mapWidth, T _mapHeight) {
+	mapWidth = static_cast<int>(_mapWidth); mapHeight = static_cast<int>(_mapHeight);
+}

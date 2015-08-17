@@ -1,55 +1,79 @@
 ﻿#pragma once
 
 #include <vector>
-#include <stdarg.h>
 #include "ZeroSprite.h"
+
+#define SAFE_DELETE(p)       { if(p) { delete (p);     (p)=0; } }
+#define SAFE_DELETE_ARRAY(p) { if(p) { delete[] (p);   (p)=0; } }
+#define SAFE_RELEASE(p)      { if(p) { (p)->Release(); (p)=0; } }
 
 using namespace std;
 
 class ZeroAnimation : public ZeroIScene {
 
 private:
-	float m_fFrame;
-	float m_fFrameSpeed;
-	int m_iMaxFrame;
-
-	bool m_bStart;	//애니메이션 시작?정지?
-	bool m_bLoop;	//애니메이션 루프
-	vector<ZeroSprite*> m_Animates;
+	vector<ZeroSprite*> animationList;
+	int numberOfFrames;
+	float framesPerSecond;
+	float currentFrame;
+	bool isRunning;
+	bool isLooping;
 
 public:
+	// Deprecated Constructor
 	template <typename T>
-	ZeroAnimation(T speed, bool loop = true) {
-		m_iMaxFrame = 0;
-		m_fFrameSpeed = static_cast<float>(speed);
-		m_fFrame = 0;
-		m_bStart = true;
-		m_bLoop = loop;
-	}
+	ZeroAnimation(T _frameSpeed, bool _isLooping = true);
+	ZeroAnimation(float _frameSpeed, bool _isLooping = true);
 	~ZeroAnimation();
 
-	void PushSprite(char *path, ...);
+	void PushSprite(char* _imageFilePath, ...);
 	void Start();
 	void Stop();
 
-	template <typename T>
-	void SetFrameSpeed(T speed) {
-		m_fFrameSpeed = static_cast<float>(speed);
-	}
-
-	template <typename T>
-	void SetFrame(T frame) {
-		m_fFrame = static_cast<float>(frame);
-	}
-
-	float Frame() const {
-		return m_fFrame;
-	}
-
-	int MaxFrame() const {
-		return m_iMaxFrame;
-	}
-
-	void Update(float eTime);
+	void Update(float _eTime);
 	void Render();
+
+	int NumberOfFrames() const;
+	float FramesPerSecond() const;
+	void SetFramesPerSecond(float _framesPerSecond);
+	int CurrentFrame() const;
+	void SetCurrentFrame(int _currentFrame);
+	bool IsRunning() const;
+	void SetRunning(bool _isRunning);
+	bool IsLooping() const;
+	void SetLooping(bool _isLooping);
+
+	// Deprecated Getter and Setter Start
+	template <typename T>
+	void SetFrameSpeed(T _frameSpeed);
+	template <typename T>
+	void SetFrame(T _currentFrame);
+	float Frame() const;
+	int MaxFrame() const;
+	// Deprecated Getter and Setter End
 };
+
+// Templates only be implemented in the header file
+
+// Deprecated Constructor Start
+template <typename T>
+ZeroAnimation::ZeroAnimation(T _frameSpeed, bool _isLooping) {
+	numberOfFrames = 0;
+	framesPerSecond = static_cast<float>(_frameSpeed);
+	currentFrame = 0;
+	isRunning = true;
+	isLooping = _isLooping;
+}
+// Deprecated Constructor End
+
+// Deprecated Getter and Setter Start
+template <typename T>
+void ZeroAnimation::SetFrameSpeed(T _frameSpeed) {
+	framesPerSecond = static_cast<float>(_frameSpeed);
+}
+
+template <typename T>
+void ZeroAnimation::SetFrame(T _currentFrame) {
+	currentFrame = static_cast<float>(_currentFrame);
+}
+// Deprecated Getter and Setter End

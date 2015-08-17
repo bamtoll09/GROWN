@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "DXUT.h"
+#include <d3d9.h>
 #include "ZeroIScene.h"
 #include "ZeroResource.h"
 
