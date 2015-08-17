@@ -54,6 +54,3 @@ ZeroSceneMgr->ChangeScene(new SpriteExample());
   - `ShaderExample`
   - `CameraExample`
   - `SoundExample`
-
-## FMOD 라이센스
-  FMOD Studio, copyright © Firelight Technologies Pty, Ltd., 2012-2015.

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -45,7 +45,7 @@
     <IntDir>$(Configuration)\</IntDir>
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include;Include;$(IncludePath);$(DXSDK_DIR)Include</IncludePath>
-    <LibraryPath>Lib;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;$(VC_LibraryPath_x86);$(DXSDK_DIR)Lib\x86;$(WindowsSDK_LibraryPath_x86)</LibraryPath>
+    <LibraryPath>Lib;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
@@ -84,7 +84,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>ZeroEngine_Release.lib;d3dx9.lib;d3d9.lib;winmm.lib;dsound.lib;dxerr.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ZeroEngine-Release.lib;fmod_vc.lib;d3dx9.lib;d3d9.lib;winmm.lib;dsound.lib;dxerr.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
