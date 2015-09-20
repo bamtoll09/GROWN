@@ -1,4 +1,5 @@
-﻿#include "AnimationExample.h"
+﻿#include "stdafx.h"
+#include "AnimationExample.h"
 
 /*--------------------------------------------------------------------------------*/
 //

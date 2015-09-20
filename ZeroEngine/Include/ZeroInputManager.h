@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include <d3d9.h>
 #include "ZeroVec.h"
 #include "ZeroRect.h"
 
@@ -21,11 +20,11 @@ class ZeroInputManager {
 private:
 	ZeroInputManager();
 
-	bool m_bPreviousKey[256];
-	bool m_bCurrentKey[256];
-	bool m_bLockKey[256];
+	bool previousKey[256];
+	bool currentKey[256];
+	bool lockKey[256];
 
-	int m_iWheel;
+	int wheel;
 
 public:
 	~ZeroInputManager();
@@ -33,9 +32,9 @@ public:
 	static ZeroInputManager* Instance();
 
 	void KeyState();
-	int GetKey(int key);
-	void LockKey(int key);
-	void UnlockKey(int key);
+	int GetKey(int _key);
+	void LockKey(int _key);
+	void UnlockKey(int _key);
 
 	ZeroVec GetClientPoint();
 	ZeroVec GetScreenPoint();
@@ -43,5 +42,5 @@ public:
 	ZeroRect GetScreenRect();
 
 	int GetWheel();
-	void WheelState(WPARAM wParam);
+	void WheelState(WPARAM _wParam);
 };

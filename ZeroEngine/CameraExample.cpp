@@ -1,4 +1,5 @@
-﻿#include "CameraExample.h"
+﻿#include "stdafx.h"
+#include "CameraExample.h"
 
 /*--------------------------------------------------------------------------------*/
 //

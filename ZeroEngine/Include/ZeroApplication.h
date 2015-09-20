@@ -1,10 +1,16 @@
 ﻿#pragma once
 
-#include <d3d9.h>
 #include "ZeroRingBuffer.h"
 #include "ZeroProcessMonitor.h"
 #include "ZeroRegulator.h"
-#include <windows.h>
+#include "ZeroCameraManager.h"
+#include "ZeroSceneManager.h"
+#include "ZeroSoundManager.h"
+#include "ZeroInputManager.h"
+#include "ZeroTextureManager.h"
+#include "ZeroSpriteManager.h"
+#include "ZeroShaderManager.h"
+#include "ZeroResourceManager.h"
 
 #define SAFE_DELETE(p)       { if(p) { delete (p);     (p)=0; } }
 #define SAFE_DELETE_ARRAY(p) { if(p) { delete[] (p);   (p)=0; } }

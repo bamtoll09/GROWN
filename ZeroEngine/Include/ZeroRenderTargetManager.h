@@ -1,8 +1,5 @@
 ﻿#pragma once
 
-#include <map>
-#include <stdarg.h>
-#include <string>
 #include "ZeroRenderTarget.h"
 
 #define SAFE_DELETE(p)       { if(p) { delete (p);     (p)=0; } }
@@ -16,12 +13,12 @@ using namespace std;
 class ZeroRenderTargetManager {
 private:
 	typedef map<string, ZeroRenderTarget*> RT;
-	RT m_RenderTargets;
+	RT renderTargets;
 	ZeroRenderTargetManager();
 
 public:
 	~ZeroRenderTargetManager();
 	static ZeroRenderTargetManager* Instance();
-	ZeroRenderTarget* LoadRenderTarget(char* page, ...);
+	ZeroRenderTarget* LoadRenderTarget(char* _page, ...);
 	void ClearAllShaders();
 };

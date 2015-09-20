@@ -1,4 +1,5 @@
-﻿#include <Windows.h>
+﻿#include "stdafx.h"
+#include <Windows.h>
 #include "Zero.h"
 #include "Examples.h"
 

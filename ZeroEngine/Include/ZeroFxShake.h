@@ -4,13 +4,13 @@
 
 class ZeroFxShake : public ZeroIShader {
 private:
-	float m_fStrength;
-	float m_fTime;
-	float m_fBeginTime;
+	float strength;
+	float time;
+	float beginTime;
 
 public:
-	ZeroFxShake(float power_0_0p25, float time, char* renderpage);
+	ZeroFxShake(float _power_0_0p25, float _time, char* _renderPage);
 	~ZeroFxShake();
 
-	void Update(float eTime);
+	void Update(float _eTime);
 };

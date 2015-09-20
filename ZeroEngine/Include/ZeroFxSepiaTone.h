@@ -4,12 +4,12 @@
 
 class ZeroFxSepiaTone : public ZeroIShader {
 private:
-	float m_fTime;
-	float m_fBeginTime;
+	float time;
+	float beginTime;
 
 public:
-	ZeroFxSepiaTone(float time, char* renderpage);
+	ZeroFxSepiaTone(float _time, char* _renderPage);
 	~ZeroFxSepiaTone();
 
-	void Update(float eTime);
+	void Update(float _eTime);
 };

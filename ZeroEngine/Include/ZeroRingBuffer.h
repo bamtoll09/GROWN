@@ -3,40 +3,40 @@
 template <typename T, UINT MaxElements>
 class ZeroRingBuffer {
 private:
-	UINT m_Start;
-	UINT m_Count;
-	T m_Elements[MaxElements];
+	UINT start;
+	UINT count;
+	T elements[MaxElements];
 
 public:
-	ZeroRingBuffer() : m_Start(0), m_Count(0) {
+	ZeroRingBuffer() : start(0), count(0) {
 
 	}
 
-	void Add(T Element) {
-		m_Elements[(m_Start + m_Count) % MaxElements] = Element;
+	void Add(T _element) {
+		elements[(start + count) % MaxElements] = _element;
 
-		if (m_Count < MaxElements) {
-			m_Count++;
+		if (count < MaxElements) {
+			count++;
 		}
 		else {
-			m_Start = (m_Start + 1) % MaxElements;
+			start = (start + 1) % MaxElements;
 		}
 	}
 
-	T GetFirst()const {
-		return m_Elements[m_Start];
+	T GetFirst() const {
+		return elements[start];
 	}
 
-	T GetLast()const {
-		return m_Elements[(m_Start + m_Count - 1) % MaxElements];
+	T GetLast() const {
+		return elements[(start + count - 1) % MaxElements];
 	}
 
-	T GetCount()const {
-		return m_Count;
+	T GetCount() const {
+		return count;
 	}
 
 	void Reset() {
-		m_Start = 0;
-		m_Count = 0;
+		start = 0;
+		count = 0;
 	}
 };

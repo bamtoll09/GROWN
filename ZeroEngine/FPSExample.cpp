@@ -1,4 +1,5 @@
-﻿#include "FPSExample.h"
+﻿#include "stdafx.h"
+#include "FPSExample.h"
 
 /*--------------------------------------------------------------------------------*/
 //

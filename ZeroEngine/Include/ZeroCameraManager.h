@@ -14,6 +14,7 @@ private:
 
 	// 카메라가 이동 가능한 위치는 (0, 0)부터 (mapWidth, mapHeight) 사이이다.
 	int mapWidth, mapHeight;
+	float moveSpeed;
 
 	//싱글 톤
 	ZeroCameraManager();
@@ -47,6 +48,10 @@ public:
 
 	template<typename T>
 	void SetScreen(T _mapWidth, T _mapHeight);
+
+	float MoveSpeed() const;
+	template<typename T>
+	void SetSpeed(T _moveSpeed);
 };
 
 template <typename T>
@@ -62,6 +67,11 @@ void ZeroCameraManager::SetWidth(T _mapWidth) {
 template <typename T>
 void ZeroCameraManager::SetHeight(T _mapHeight) {
 	mapHeight = static_cast<int>(_mapHeight);
+}
+
+template <typename T>
+void ZeroCameraManager::SetSpeed(T _moveSpeed) {
+	moveSpeed = static_cast<float>(_moveSpeed);
 }
 
 template <typename T>

@@ -1,4 +1,5 @@
-﻿#include "SpriteExample.h"
+﻿#include "stdafx.h"
+#include "SpriteExample.h"
 
 /*--------------------------------------------------------------------------------*/
 //

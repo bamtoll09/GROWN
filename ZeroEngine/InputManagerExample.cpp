@@ -1,4 +1,5 @@
-﻿#include "InputManagerExample.h"
+﻿#include "stdafx.h"
+#include "InputManagerExample.h"
 
 /*--------------------------------------------------------------------------------*/
 //

@@ -1,16 +1,16 @@
-#pragma once
+﻿#pragma once
 #include "ZeroIShader.h"
 
 class ZeroTrRandomCircleReveal : public ZeroIShader {
 private:
-	float m_fTime;
-	float m_fBeginTime;
+	float time;
+	float beginTime;
 
 	LPDIRECT3DTEXTURE9 m_pCloudTex;
-	LPDIRECT3DTEXTURE9 m_pSecondTex;
+	LPDIRECT3DTEXTURE9 secondTexture;
 public:
-	ZeroTrRandomCircleReveal(float time, char* renderpage, LPDIRECT3DTEXTURE9 secondTex);
+	ZeroTrRandomCircleReveal(float _time, char* _renderPage, LPDIRECT3DTEXTURE9 _secondTexture);
 	~ZeroTrRandomCircleReveal();
 
-	void Update(float eTime);
+	void Update(float _eTime);
 };

@@ -4,12 +4,12 @@
 
 class ZeroFxEdgeDetect : public ZeroIShader {
 private:
-	float m_fTime;
-	float m_fBeginTime;
+	float time;
+	float beginTime;
 
 public:
-	ZeroFxEdgeDetect(float time, char* renderpage);
+	ZeroFxEdgeDetect(float _time, char* _renderPage);
 	~ZeroFxEdgeDetect();
 
-	void Update(float eTime);
+	void Update(float _eTime);
 };

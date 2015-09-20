@@ -1,4 +1,5 @@
-﻿#include "SceneManagerExample.h"
+﻿#include "stdafx.h"
+#include "SceneManagerExample.h"
 #include "FPSExample.h"
 
 /*--------------------------------------------------------------------------------*/

@@ -1,42 +1,40 @@
 ﻿#pragma once
 
-#include <vector>
-#include <stdarg.h>
 #include "ZeroIScene.h"
 #include "ZeroResource.h"
 
 class ZeroLine : public ZeroIScene, public ZeroResource {
 private:
 	typedef std::vector<ZeroVec> POINTLIST;
-	POINTLIST m_Points;
+	POINTLIST pointList;
 
-	LPD3DXLINE m_pLine;
-	LPD3DXLINE m_pUtilLine;
-	float m_LineWidth;
-	DWORD m_LinePattern;
+	LPD3DXLINE line;
+	LPD3DXLINE utilLine;
+	float lineWidth;
+	DWORD lineHeight;
 
 public:
 	ZeroLine();
 	~ZeroLine();
 
 	//포인트들
-	void PushFrontPoint(int num, ...);
-	void PushBackPoint(int num, ...);
-	void PushFrontPoint(ZeroVec point);
-	void PushBackPoint(ZeroVec point);
-	void PopFrontPoint(int numPop);
-	void PopBackPoint(int numPop);
+	void PushFrontPoint(int _num, ...);
+	void PushBackPoint(int _num, ...);
+	void PushFrontPoint(ZeroVec _point);
+	void PushBackPoint(ZeroVec _point);
+	void PopFrontPoint(int _numberToPop);
+	void PopBackPoint(int _numberToPop);
 	void ClearPoint();
 
 	//속성
-	void SetLineWidth(float width);
-	void SetLinePattern(DWORD pattern);
+	void SetLineWidth(float _width);
+	void SetLinePattern(DWORD _pattern);
 
 	//유틸리티 기능
-	void DrawRect(ZeroRect rect);
-	void DrawCircle(ZeroVec pos, float radius);
+	void DrawRect(ZeroRect _rect);
+	void DrawCircle(ZeroVec _center, float _radius);
 
-	void Update(float eTime);
+	void Update(float _eTime);
 	void Render();
 
 private:

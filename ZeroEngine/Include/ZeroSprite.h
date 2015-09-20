@@ -1,28 +1,27 @@
 ﻿#pragma once
 
-#include <stdarg.h>
 #include "ZeroIScene.h"
 #include "ZeroResource.h"
 
 class ZeroSprite : public ZeroIScene, public ZeroResource {
 private:
-	LPDIRECT3DTEXTURE9 m_pTexture;
-	string m_TexturePath;
-	int m_iRenderState;
+	LPDIRECT3DTEXTURE9 texture;
+	string texturePath;
+	int renderState;
 
 public:
-	ZeroSprite(char *path, ...);
+	ZeroSprite(char* _path, ...);
 	~ZeroSprite();
 
-	void Update(float eTime);
+	void Update(float _eTime);
 	void Render();
 
 public:
 	int RenderState() const {
-		return m_iRenderState;
+		return renderState;
 	}
-	void SetRenderState(int renderstate) {
-		m_iRenderState = renderstate;
+	void SetRenderState(int _renderState) {
+		renderState = _renderState;
 	}
 
 private:

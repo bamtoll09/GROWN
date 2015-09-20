@@ -1,8 +1,5 @@
 ﻿#pragma once
 
-#include <map>
-#include <d3dx9.h>
-
 using namespace std;
 
 #define ZeroShaderMgr ZeroShaderManager::Instance()
@@ -12,13 +9,13 @@ private:
 	ZeroShaderManager();
 
 	typedef map<char*, LPD3DXEFFECT> SHADER;
-	SHADER m_Shaders;
+	SHADER shaderList;
 
 public:
 	~ZeroShaderManager();
 
 	static ZeroShaderManager* Instance();
 
-	LPD3DXEFFECT LoadShaderFromFile(char *path);
+	LPD3DXEFFECT LoadShaderFromFile(char * _path);
 	void ReloadResource();
 };

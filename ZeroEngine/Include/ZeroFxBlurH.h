@@ -4,13 +4,13 @@
 
 class ZeroFxBlurH : public ZeroIShader {
 private:
-	float m_fTime;
-	float m_fBeginTime;
-	float m_fBlur;
+	float time;
+	float beginTime;
+	float blur;
 
 public:
-	ZeroFxBlurH(float time, char* renderpage);
+	ZeroFxBlurH(float _time, char* _renderPage);
 	~ZeroFxBlurH();
 
-	void Update(float eTime);
+	void Update(float _eTime);
 };

@@ -1,4 +1,5 @@
-﻿#include "RenderTargetExample.h"
+﻿#include "stdafx.h"
+#include "RenderTargetExample.h"
 
 /*--------------------------------------------------------------------------------*/
 //

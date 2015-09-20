@@ -1,15 +1,15 @@
-#pragma once
+﻿#pragma once
 #include "ZeroIShader.h"
 
 class ZeroTrFade : public ZeroIShader {
 private:
-	float m_fTime;
-	float m_fBeginTime;
+	float time;
+	float beginTime;
 
-	LPDIRECT3DTEXTURE9 m_pSecondTex;
+	LPDIRECT3DTEXTURE9 secondTexture;
 public:
-	ZeroTrFade(float time, char* renderpage, LPDIRECT3DTEXTURE9 secondTex);
+	ZeroTrFade(float _time, char* _renderPage, LPDIRECT3DTEXTURE9 _secondTexture);
 	~ZeroTrFade();
 
-	void Update(float eTime);
+	void Update(float _eTime);
 };

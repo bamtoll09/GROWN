@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-#include <Pdh.h>
-
 class ZeroProcessMonitor {
 	// 생성자/소멸자
 public:
@@ -22,9 +20,9 @@ protected:
 
 	// 멤버 변수
 protected:
-	HANDLE m_hProcess;
-	TCHAR m_szProcessName[MAX_PATH];
+	HANDLE process;
+	TCHAR processName[MAX_PATH];
 
-	HQUERY m_hCpuUsageQuery;
-	HCOUNTER m_hCpuUsageCounter;
+	HQUERY cpuUsageQuery;
+	HCOUNTER cpuUsageCounter;
 };

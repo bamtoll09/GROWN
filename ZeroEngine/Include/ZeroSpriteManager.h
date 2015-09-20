@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include <d3dx9.h>
 
 #define ZeroSpriteMgr ZeroSpriteManager::Instance()
 
@@ -12,7 +11,7 @@ enum {
 
 class ZeroSpriteManager {
 private:
-	LPD3DXSPRITE m_pSprite;
+	LPD3DXSPRITE sprite;
 
 	ZeroSpriteManager();
 public:

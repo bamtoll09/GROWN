@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include "Zero.h"
 #include "ZeroAnimation.h"
 #include "ZeroApplication.h"
 #include "ZeroCameraManager.h"

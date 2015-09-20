@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include <list>
 #include "ZeroIEffect.h"
 
 #pragma warning(disable: 4996)
@@ -21,9 +20,9 @@ public:
 
 	static ZeroEffectManager* Instance();
 
-	void PushEffect(ZeroIEffect* _p, ZeroVec _pos);
-	void PushEffect(ZeroIEffect* _p);
-	void PopEffect(ZeroIEffect* _p);
+	void PushEffect(ZeroIEffect* _effect, ZeroVec _position);
+	void PushEffect(ZeroIEffect* _effect);
+	void PopEffect(ZeroIEffect* _effect);
 	void Clear();
 
 	void Update(float _eTime);

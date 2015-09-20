@@ -1,4 +1,5 @@
-﻿#include "SoundExample.h"
+﻿#include "stdafx.h"
+#include "SoundExample.h"
 
 /*--------------------------------------------------------------------------------*/
 //

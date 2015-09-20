@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-#include <vector>
-
 class ZeroResource;
 
 #define ZeroResourceMgr ZeroResourceManager::GetInstance()
@@ -12,7 +10,7 @@ private:
 	~ZeroResourceManager(void);
 
 	typedef std::vector<ZeroResource*> ResourceList;
-	ResourceList m_ResourceList;
+	ResourceList resourceList;
 
 public:
 	static ZeroResourceManager* GetInstance();
@@ -20,7 +18,7 @@ public:
 	void ReloadAllResource();
 	void OnPrevDeviceReset();
 	void OnPostDeviceReset();
-	void RegisterResource(ZeroResource* _iNewResource);
-	void UnRegisterResource(ZeroResource* _iRemoveResource);
+	void RegisterResource(ZeroResource* _newResource);
+	void UnRegisterResource(ZeroResource* _removeResource);
 	void CleanUp();
 };

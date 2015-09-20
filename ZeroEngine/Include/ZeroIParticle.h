@@ -1,61 +1,60 @@
 ﻿#pragma once
 
-#include <d3d9.h>
 #include "ZeroIScene.h"
 #include "ZeroResource.h"
 
 class ZeroIParticle : public ZeroIScene, public ZeroResource {
 private:
-	LPDIRECT3DTEXTURE9 m_pTexture;
-	string m_TexturePath;
+	LPDIRECT3DTEXTURE9 texture;
+	string texturePath;
 
-	ZeroVec m_vSpeed;
-	float m_fLifeTime;
-	float m_fNowLifeTime;
-	float m_fRotSpeed;
-	int m_iRenderState;
+	ZeroVec speed;
+	float lifeTime;
+	float nowLifeTime;
+	float rotationSpeed;
+	int renderState;
 
-	int m_ColorA, m_ColorR, m_ColorG, m_ColorB;
+	int colorA, colorR, colorG, colorB;
 
 	void ReloadResource();
 
 public:
-	ZeroIParticle(char *path, ZeroVec speed, float lifetime, float size, float rotspeed, int colorA, int colorR, int colorG, int colorB, int renderstate);
+	ZeroIParticle(char *_path, ZeroVec _speed, float _lifeTime, float _size, float _rotationSpeed, int _colorA, int _colorR, int _colorG, int _colorB, int _renderState);
 	~ZeroIParticle();
 
 	void Render();
-	void Update(float eTime);
+	void Update(float _eTime);
 
 	ZeroVec Speed() const {
-		return m_vSpeed;
+		return speed;
 	}
 	float LifeTime() const {
-		return m_fLifeTime;
+		return lifeTime;
 	}
 	float NowLifeTime() const {
-		return m_fNowLifeTime;
+		return nowLifeTime;
 	}
 	float RotSpeed() const {
-		return m_fRotSpeed;
+		return rotationSpeed;
 	}
 
 	int RenderState() const {
-		return m_iRenderState;
+		return renderState;
 	}
-	void SetRenderState(int renderstate) {
-		m_iRenderState = renderstate;
+	void SetRenderState(int _renderState) {
+		renderState = _renderState;
 	}
 
 	void SetColorA(int a) {
-		m_ColorA = a;
+		colorA = a;
 	}
 	void SetColorR(int r) {
-		m_ColorR = r;
+		colorR = r;
 	}
 	void SetColorG(int g) {
-		m_ColorG = g;
+		colorG = g;
 	}
 	void SetColorB(int b) {
-		m_ColorB = b;
+		colorB = b;
 	}
 };

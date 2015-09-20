@@ -34,9 +34,9 @@ class ZeroSceneManager {
 private:
 	ZeroSceneManager();
 
-	ZeroIScene *m_pNow;
-	ZeroIScene *m_pTemp;
-	ZeroIScene *m_pShader;
+	ZeroIScene *now;
+	ZeroIScene *temp;
+	ZeroIScene *shader;
 	float m_fChangeTime;
 	bool m_bErase;
 
@@ -45,9 +45,9 @@ public:
 
 	static ZeroSceneManager* Instance();
 
-	void Update(float eTime);
+	void Update(float _eTime);
 	void Render();
 
-	void ChangeScene(ZeroIScene *p, int kindTr = -1, float time = 2.0f, bool isErase = true);
+	void ChangeScene(ZeroIScene * _scene, int _kindTr = -1, float _time = 2.0f, bool _isErase = true);
 	void Clear();
 };

@@ -1,17 +1,13 @@
 ﻿#pragma once
 
-#include <math.h>
-#include <limits>
-#include <stdlib.h>
-
 #define ZeroMathMgr ZeroMathManager::Instance()
 
 class ZeroMathManager {
 private:
 	ZeroMathManager();
 
-	float m_Sin[360];
-	float m_Cos[360];
+	float sinTable[360];
+	float cosTable[360];
 
 public:
 	~ZeroMathManager();
@@ -19,62 +15,62 @@ public:
 	static ZeroMathManager* Instance();
 
 	template <typename T>
-	float DegToRad(T deg) {
-		return static_cast<float>(Pi * (deg / 180.0f));
+	float DegToRad(T _degree) {
+		return static_cast<float>(Pi * (_degree / 180.0f));
 	}
 
 	template <typename T>
-	float RadToDeg(T rad) {
-		return static_cast<float>(rad * 180.0f / Pi);
+	float RadToDeg(T _radian) {
+		return static_cast<float>(_radian * 180.0f / Pi);
 	}
 
 	template <typename T>
-	bool InRange(T start, T end, T val) {
-		if (start < end) {
-			if ((val > start) && (val < end)) return true;
+	bool InRange(T _start, T _end, T _val) {
+		if (_start < _end) {
+			if ((_val > _start) && (_val < _end)) return true;
 			else return false;
 		}
 		else {
-			if ((val < start) && (val > end)) return true;
+			if ((_val < _start) && (_val > _end)) return true;
 			else return false;
 		}
 	}
 
 	template <typename T>
-	T Max(const T& v1, const T& v2) {
-		return (v1 > v2) ? v1 : v2;
+	T Max(const T& _v1, const T& _v2) {
+		return (_v1 > _v2) ? _v1 : _v2;
 	}
 
 	template <typename T>
-	T Min(const T& v1, const T& v2) {
-		return (v1 > v2) ? v2 : v1;
+	T Min(const T& _v1, const T& _v2) {
+		return (_v1 > _v2) ? _v2 : _v1;
 	}
 
 	template <typename T, typename U, typename V>
-	void Clamp(T& arg, const U& minVal, const V& maxVal) {
-		if (arg < (T) minVal)
-			arg = (T) minVal;
-		if (arg >(T)maxVal)
-			arg = (T) maxVal;
+	void Clamp(T& arg, const U& _minVal, const V& _maxVal) {
+		if (arg < (T) _minVal)
+			arg = (T) _minVal;
+		if (arg >(T)_maxVal)
+			arg = (T) _maxVal;
 	}
 	//-------------------------- Rand Functions --------------------------//
 
-	int RandInt(int x, int y);
+	int RandInt(int _x, int _y);
 	float RandFloat(float x, float y);
 
 	//-------------------------- Tri Functions --------------------------//
 
 	template <typename T>
-	float Sin(T sin) {
-		while (sin < 0)
-			sin += 360;
-		return m_Sin[static_cast<int>(sin) % 360];
+	float Sin(T _sin) {
+		while (_sin < 0)
+			_sin += 360;
+		return sinTable[static_cast<int>(_sin) % 360];
 	}
 	template <typename T>
-	float Cos(T cos) {
-		while (cos < 0)
-			cos += 360;
-		return m_Cos[static_cast<int>(cos) % 360];
+	float Cos(T _cos) {
+		while (_cos < 0)
+			_cos += 360;
+		return cosTable[static_cast<int>(_cos) % 360];
 	}
 
 	//-------------------------- Constants --------------------------//

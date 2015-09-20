@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-#include <math.h>
-#include <vector>
 #include "ZeroVec.h"
 
 class ZeroMat {
@@ -17,9 +15,9 @@ private:
 		}
 	};
 
-	Matrix m_Matrix;
+	Matrix matrix;
 	//행렬끼리 곱
-	inline void  MatrixMultiply(Matrix &mIn);
+	inline void  MatrixMultiply(Matrix & _matrix);
 
 public:
 	ZeroMat() {
@@ -31,52 +29,52 @@ public:
 	void Identity();
 
 	//이동 행렬 생성
-	void Translate(float x, float y);
+	void Translate(float _x, float _y);
 
 	//크기 행렬 생성
-	void Scale(float xScale, float yScale);
+	void Scale(float _xScale, float _yScale);
 
 	//회전 행렬 생성
-	void  Rotate(float rotation);
+	void  Rotate(float _rotation);
 
 	//heading으로부터 side각도로 회전 행렬 생성
-	void  Rotate(const ZeroVec &fwd, const ZeroVec &side);
+	void  Rotate(const ZeroVec & _fwd, const ZeroVec & _side);
 
 	//주어진 ZeroVec들을 해당 행렬로 변환시킨다.
-	void TransformZeroVec(std::vector<ZeroVec> &vPoints);
+	void TransformZeroVec(std::vector<ZeroVec> & _vPoint);
 
 	//주어진 ZeroVec을 해당 행렬로 변환시킨다.
-	void TransformZeroVec(ZeroVec &vPoint);
+	void TransformZeroVec(ZeroVec & _vPoint);
 
 	//행렬 요소에 수치를 적용한다.
 	void _11(float val) {
-		m_Matrix._11 = val;
+		matrix._11 = val;
 	}
 	void _12(float val) {
-		m_Matrix._12 = val;
+		matrix._12 = val;
 	}
 	void _13(float val) {
-		m_Matrix._13 = val;
+		matrix._13 = val;
 	}
 
 	void _21(float val) {
-		m_Matrix._21 = val;
+		matrix._21 = val;
 	}
 	void _22(float val) {
-		m_Matrix._22 = val;
+		matrix._22 = val;
 	}
 	void _23(float val) {
-		m_Matrix._23 = val;
+		matrix._23 = val;
 	}
 
 	void _31(float val) {
-		m_Matrix._31 = val;
+		matrix._31 = val;
 	}
 	void _32(float val) {
-		m_Matrix._32 = val;
+		matrix._32 = val;
 	}
 	void _33(float val) {
-		m_Matrix._33 = val;
+		matrix._33 = val;
 	}
 };
 

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "ZeroTrBandedSwirl.h"
 #include "ZeroTrCircleReveal.h"
 #include "ZeroTrCircleStretch.h"

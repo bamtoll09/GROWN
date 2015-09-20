@@ -1,10 +1,5 @@
 ﻿#pragma once
 
-#include <map>
-#include <string>
-#include <d3d9.h>
-#include <d3dx9core.h>
-
 using namespace std;
 
 #define ZeroTexMgr ZeroTextureManager::Instance()
@@ -14,12 +9,14 @@ private:
 	ZeroTextureManager();
 
 	typedef map<string, LPDIRECT3DTEXTURE9> TEXTURE;
-	TEXTURE m_TexMap;
+	TEXTURE textureList;
 
 public:
 	~ZeroTextureManager();
 
 	static ZeroTextureManager* Instance();
-	LPDIRECT3DTEXTURE9 LoadTextureFromFile(char* path);
+	LPDIRECT3DTEXTURE9 LoadTextureFromFile(char* _path);
+	void Release(char* _path, ...);
+	void Clear();
 	void ReloadResource();
 };

@@ -1,4 +1,5 @@
-﻿#include "ShaderExample.h"
+﻿#include "stdafx.h"
+#include "ShaderExample.h"
 
 /*--------------------------------------------------------------------------------*/
 //

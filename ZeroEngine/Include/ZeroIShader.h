@@ -4,28 +4,28 @@
 
 class ZeroIShader : public ZeroIScene {
 protected:
-	bool m_bControl;
-	char* m_iRenderPage;
-	bool m_bRightErase;
+	bool control;
+	char* renderPage;
+	bool rightErase;
 
 public:
-	ZeroIShader(char* renderpage);
+	ZeroIShader(char* _renderPage);
 	~ZeroIShader();
 
-	void Update(float eTime);
+	void Update(float _eTime);
 	void Render();
 
 	int IsControl()const {
-		return m_bControl;
+		return control;
 	}
 	void SetControl(bool control) {
-		m_bControl = control;
+		control = control;
 	}
 
 	bool IsRightErase()const {
-		return m_bRightErase;
+		return rightErase;
 	}
 	void SetRightErase(bool erase) {
-		m_bRightErase = erase;
+		rightErase = erase;
 	}
 };

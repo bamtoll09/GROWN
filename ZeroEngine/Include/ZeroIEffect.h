@@ -4,19 +4,17 @@
 
 class ZeroIEffect : public ZeroIScene {
 private:
-	int m_iRenderPage;
+	int renderPage;
 
 public:
 	ZeroIEffect();
 	~ZeroIEffect();
 
-	void Update(float eTime);
+	void Update(float _eTime);
 	void Render();
 
-	int RenderPage() const {
-		return m_iRenderPage;
-	}
-	void SetRenderPage(int renderpage) {
-		m_iRenderPage = renderpage;
+	int RenderPage() const;
+	void SetRenderPage(int _renderPage){
+		renderPage = _renderPage;
 	}
 };

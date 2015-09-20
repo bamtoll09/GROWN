@@ -5,18 +5,18 @@
 
 class ZeroFxNightVision : public ZeroIShader, public ZeroResource {
 private:
-	LPDIRECT3DTEXTURE9 m_pTexNoise;
-	float m_fTime;
-	float m_fBeginTime;
+	LPDIRECT3DTEXTURE9 texNoise;
+	float time;
+	float beginTime;
 
 	// 경과 시간
-	float m_fFrame;
+	float elapsedTime;
 
 	void ReloadResource();
 
 public:
-	ZeroFxNightVision(float time, char* renderpage);
+	ZeroFxNightVision(float _time, char* _renderPage);
 	~ZeroFxNightVision();
 
-	void Update(float eTime);
+	void Update(float _eTime);
 };

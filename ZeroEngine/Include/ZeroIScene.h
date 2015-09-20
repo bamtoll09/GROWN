@@ -1,8 +1,5 @@
 ﻿#pragma once
 
-#include <vector>
-#include <cassert>
-#include <d3d9.h>
 #include "ZeroVec.h"
 #include "ZeroRect.h"
 
@@ -93,26 +90,26 @@ public:
 	//카메라 위치를 고려하여 m_vWorldPos값을 계산하고
 	//본 객체가 가지고있는 하위객체들의 Update()함수를 실행한다.
 	//그리고 m_bErase가 활성화되어있는 하위객체들 역시 제거한다. 
-	void virtual Update(float eTime);
+	void virtual Update(float _eTime);
 
 	//카메라 위치를 고려하여 m_vWorldPos값을 계산한다.
 	void UpdateWorldPos();
 
 	//본 객체에 하위객체를 등록한다.
-	void PushScene(ZeroIScene* p, bool update = true);
+	void PushScene(ZeroIScene* _scene, bool update = true);
 
 	//본 객체에 등록되어있는 하위객체를 빼낸다.
 	//isErase가 참이면 메모리 제거까지 수행한다.
 	//만일 본 객체에 p가 존재하지 않는다면 아무 작업도 수행하지 않는다.
-	void PopScene(ZeroIScene* p, bool isErase = true);
+	void PopScene(ZeroIScene* _scene, bool isErase = true);
 
 	//본 객체의 하위객체중 p가 존재하는지 확인한다.
 	//만일 존재한다면 true를 반환한다.
-	bool IsExistScene(ZeroIScene* p);
+	bool IsExistScene(ZeroIScene* _scene);
 
 	//본 객체가 p와 겹치는지 충돌검사를 수행한다.
 	//만일 겹친다면 true를 반환한다.
-	bool IsOverlapped(ZeroIScene* p);
+	bool IsOverlapped(ZeroIScene* _scene);
 
 	//pos가 본 객체 안에 있는지 충돌검사를 수행한다.
 	//만일 안에 있다면 true를 반환한다.
@@ -421,7 +418,7 @@ public:
 	}
 
 	//본 객체의 상위 객체를 설정한다.
-	//이 함수를 사용하는 것보단 PushScene(ZeroIScene* p)함수를 사용하는 것을 권장한다.
+	//이 함수를 사용하는 것보단 PushScene(ZeroIScene* _scene)함수를 사용하는 것을 권장한다.
 	void SetParent(ZeroIScene *parent) {
 		m_pParent = parent;
 	}

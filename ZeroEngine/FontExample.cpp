@@ -1,4 +1,5 @@
-﻿#include "FontExample.h"
+﻿#include "stdafx.h"
+#include "FontExample.h"
 
 /*--------------------------------------------------------------------------------*/
 //

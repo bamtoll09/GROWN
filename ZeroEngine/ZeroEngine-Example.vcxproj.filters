@@ -47,6 +47,9 @@
     <Filter Include="WinMain">
       <UniqueIdentifier>{69884c26-f183-4c1f-bf16-01a9578cb481}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Precompiled Code">
+      <UniqueIdentifier>{90838b63-ee84-4194-a0c8-a550ff2b8a78}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Examples.h">
@@ -91,6 +94,9 @@
     <ClInclude Include="SoundExample.h">
       <Filter>Examples\13. SoundExample</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\ZeroEngine\ZeroEngine\stdafx.h">
+      <Filter>Precompiled Code</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SpriteExample.cpp">
@@ -134,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="WinMain.cpp">
       <Filter>WinMain</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Precompiled Code</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

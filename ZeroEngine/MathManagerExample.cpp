@@ -1,4 +1,5 @@
-﻿#include "MathManagerExample.h"
+﻿#include "stdafx.h"
+#include "MathManagerExample.h"
 
 /*--------------------------------------------------------------------------------*/
 //

@@ -1,10 +1,5 @@
 ﻿#pragma once
 
-#include <math.h>
-#include <limits.h>
-#include <windows.h>
-#include <d3dx9.h>
-#include <ostream>
 #include "ZeroMathManager.h"
 
 //유용한 상수들

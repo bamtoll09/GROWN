@@ -1,4 +1,5 @@
-﻿#include "LineExample.h"
+﻿#include "stdafx.h"
+#include "LineExample.h"
 
 /*--------------------------------------------------------------------------------*/
 //
