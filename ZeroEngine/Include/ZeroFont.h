@@ -21,7 +21,7 @@ public:
 	void Update(float _eTime);
 
 	void SetString(int _content);
-	void SetString(char* _format, ...);
+	void SetString(const char* _format, ...);
 
 	void SetWeight(int _weight);
 

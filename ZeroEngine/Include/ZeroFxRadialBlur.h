@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include "ZeroIShader.h"
 
 class ZeroFxRadialBlur : public ZeroIShader {
