@@ -34,11 +34,17 @@ void Box::Update(float eTime)
 	}
 
 	if (Pos().x <= 0) // »óÀÚ°¡ ¸Ê ¹ÛÀ¸·Î ³ª°¬À» ¶§ (¿ÞÂÊ)
+	{
 		SetPosX(0);
+		if (target->Pos().y + target->Height() > Pos().y && target->Pos().x <= Pos().x + Width() - 20 && target->Pos().x >= Pos().x + Width() - 40)
+			target->SetPosX(Pos().x + Width() - 20);
+	}
 
 	if (Pos().x + Width() >= ZeroCameraManager::Instance()->Width()) // (¿À¸¥ÂÊ)
 	{
 		SetPosX(ZeroCameraManager::Instance()->Width() - Width());
+		if (target->Pos().y + target->Height() > Pos().y && target->Pos().x + target->Width() >= Pos().x + 20 && target->Pos().x + target->Width() <= Pos().x + 40)
+			target->SetPosX(ZeroCameraManager::Instance()->Width() - Width() - target->Width() + 20);
 	}
 }
 

@@ -131,7 +131,7 @@ void GameScene::Update(float eTime)
 		}
 	}
 
-	if (/*in->GetKey('M') == INPUTMGR_KEYDOWN && */sItem->isSmallOn())
+	if (in->GetKey('M') == INPUTMGR_KEYDOWN && sItem->isSmallOn())
 	{
 		m_pPlayer->setScale(0.5f, 0.5f);
 		this->SetWidth(m_pPlayer->normal->Width() / 2);
@@ -141,8 +141,8 @@ void GameScene::Update(float eTime)
 	if (in->GetKey('X') == INPUTMGR_KEYDOWN && gItem->isShootOn() && !isTheWorlded) // ªÈª­ªè ªÈªÞªì
 	{
 		isTheWorlded = true;
-		sound->Play("ª¶ªï?ªëªÉ");
-		//sound->Play("countdown");
+		//sound->Play("ª¶ªï?ªëªÉ");
+		sound->Play("countdown");
 	}
 
 	if (isTheWorlded)
