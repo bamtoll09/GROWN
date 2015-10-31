@@ -4,7 +4,7 @@
 #include "Player.h"
 
 Item::Item(int no)
-	:jumpOn(false), shootOn(false), reverseOn(false), smallOn(false)
+	:itemNum(0), jumpOn(false), shootOn(false), reverseOn(false), doubleJumpOn(false), smallOn(false)
 {
 	this -> itemNum = no;
 
@@ -14,11 +14,19 @@ Item::Item(int no)
 		item = new ZeroSprite("Texture/Item/JumpBook.png");
 		break;
 
-	case 2: // Boject
+	case 2: // Bobject
 		item = new ZeroSprite("exresource/GObject.jpg");
 		break;
 
-	case 3:
+	case 3: // Robject
+		item = new ZeroSprite("exresource/RObject.jpg");
+		break;
+
+	case 4: // DJobject
+		item = new ZeroSprite("exresource/DJObject.jpg");
+		break;
+
+	case 5: // Sobject
 		item = new ZeroSprite("exresource/peanutMushroom.png");
 		break;
 	}
@@ -37,7 +45,7 @@ void Item::Update(float eTime)
 {
 	ZeroIScene::Update(eTime);
 
-	if (jumpOn || shootOn || reverseOn || smallOn)
+	if (jumpOn || shootOn || reverseOn || doubleJumpOn || smallOn)
 		this->SetErase(true);
 }
 
@@ -62,10 +70,17 @@ bool Item::isReverseOn()
 	return this->reverseOn;
 }
 
+bool Item::isDoubleJumpOn()
+{
+	return this->doubleJumpOn;
+}
+
 bool Item::isSmallOn()
 {
 	return this->smallOn;
 }
+
+
 
 void Item::isJumpOn(bool tf)
 {
@@ -81,6 +96,12 @@ void Item::isReverseOn(bool tf)
 {
 	reverseOn = tf;
 }
+
+void Item::isDoubleJumpOn(bool tf)
+{
+	doubleJumpOn = tf;
+}
+
 
 void Item::isSmallOn(bool tf)
 {

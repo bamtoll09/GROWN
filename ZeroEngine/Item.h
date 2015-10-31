@@ -5,7 +5,7 @@ class Item : public ZeroIScene
 {
 private:
 	int itemNum;
-	bool jumpOn, shootOn, reverseOn, smallOn;
+	bool jumpOn, shootOn, reverseOn, doubleJumpOn, smallOn;
 public:
 	ZeroSprite *item;
 public:
@@ -23,6 +23,9 @@ public:
 
 	bool isReverseOn();
 	void isReverseOn(bool tf);
+
+	bool isDoubleJumpOn();
+	void isDoubleJumpOn(bool tf);
 
 	bool isSmallOn();
 	void isSmallOn(bool tf);

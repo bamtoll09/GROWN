@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "GameScene.h"
+#include "BlankSceneExit.h"
 
 GameScene::GameScene(void)
-	:bulletTime(0.f), theWorld(0.f), isTheWorlded(false), db(0)
+	:bulletTime(0.f), theWorld(0.f), isTheWorlded(false), db(0), speed(300)
 {
 	printf("start\n");
 
@@ -25,6 +26,8 @@ GameScene::GameScene(void)
 	sound->PushSound("Sound/theWorld.wav", "ざわ?るど");
 	sound->PushSound("Sound/count(1~3).mp3", "countdown");
 	sound->PushSound("Sound/ORA.mp3", "ORA");
+
+	
 
 	/*PushScene(a);
 	PushScene(b);
@@ -49,6 +52,10 @@ GameScene::GameScene(void)
 	m_pPlayer -> SetPos(447, 548);
 	PushScene(m_pPlayer);
 
+	monster = new Monster(m_pPlayer, 3); // 몬스터 초기 설정
+	monster->SetPos(100, 100);
+	PushScene(monster);
+
 	jItem = new Item(1); // 아이템 초기 설정
 	jItem -> SetPos(750, 600);
 	PushScene(jItem);
@@ -57,21 +64,52 @@ GameScene::GameScene(void)
 	gItem -> SetPos(250, 600);
 	PushScene(gItem);
 
-	sItem = new Item(3);
-	sItem->SetPos(1030, 600);
+	rItem = new Item(3);
+	rItem->SetPos(900, 600);
+	PushScene(rItem);
+
+	djItem = new Item(4);
+	djItem->SetPos(1000, 600);
+	PushScene(djItem);
+
+	sItem = new Item(5);
+	sItem->SetPos(1100, 600);
 	PushScene(sItem);
 
 	switcH = new Switch(1); // 스위치 초기 설정
-	switcH->SetPos(10, app->GetWindowHeight() - switcH->Height());
+	switcH->SetPos(10, app->GetWindowHeight() - switcH->body->Height());
 	PushScene(switcH);
 
-	box = new Box(m_pPlayer);
-	box->SetPos(1080, app->GetWindowHeight() - box->Height());
-	PushScene(box);
+	box1 = new Box(m_pPlayer); // 박스 초기 설정
+	box1->SetPos(900, 20);
+	PushScene(box1);
+
+	box2 = new Box(m_pPlayer); // 박스 초기 설정
+	box2->SetPos(1300, 20);
+	PushScene(box2);
+
+	//playerAndMonster = new Intersect(m_pPlayer, monster); // 플레이어 <-> 몬스터 충돌 판정 초기 설정
+	//playerAndJItem = new Intersect(m_pPlayer, jItem); // 플레이어 <-> 점프 아이템 충돌 판정 초기 설정
+	//playerAndGItem = new Intersect(m_pPlayer, gItem); // 플레이어 <-> 총 아이템 충돌 판정 초기 설정
+	//playerAndRItem = new Intersect(m_pPlayer, rItem); // 플레이어 <-> 리버스 아이템 충돌 판정 초기 설정
+	//playerAndDJItem = new Intersect(m_pPlayer, djItem); // 플레이어 <-> 더블 점프 아이템 충돌 판정 초기 설정
+	//playerAndSItem = new Intersect(m_pPlayer, sItem); // 플레이어 <-> 땅콩 아이템 충돌 판정 초기 설정
+	//playerAndSwitch = new Intersect(m_pPlayer, switcH); // 플레이어 <-> 스위치 충돌 판정 초기 설정
+	//playerAndLadder = new Intersect(m_pPlayer, ladder, true); // 플레이어 <-> 사다리 충돌 판정 초기 설정
+
+	//PushScene(playerAndMonster);
+	//PushScene(playerAndJItem);
+	//PushScene(playerAndGItem);
+	//PushScene(playerAndRItem);
+	//PushScene(playerAndDJItem);
+	//PushScene(playerAndSItem);
+	//PushScene(playerAndSwitch);
+	//PushScene(playerAndLadder);
 
 	camera -> SetCameraOn(); // 카메라 초기 설정
 	camera -> SetScreen(3072, 768);
 	camera -> SetTarget(m_pPlayer);
+
 
 	/*player1 = new CXBOXController(1);
 	if (player1 -> IsConnected())
@@ -93,49 +131,60 @@ void GameScene::Update(float eTime)
 	//printf("Left Stick X : %f\n", state.Gamepad.sThumbLX);
 	//printf("Left Stick Y : %f\n", state.Gamepad.sThumbLY);
 	printf("%f\t%f\n", m_pPlayer->Width(), m_pPlayer->Scale().x);
-	if (in->GetKey('A') == INPUTMGR_KEYDOWN || in->GetKey(VK_LEFT) == INPUTMGR_KEYDOWN) // 플레이어 '좌'이동
-		m_pPlayer->move->Start();
-	if (in->GetKey('A') == INPUTMGR_KEYON || in->GetKey(VK_LEFT) == INPUTMGR_KEYON/* || (player1 -> IsConnected() && player1 -> GetState().Gamepad.wButtons & XINPUT_GAMEPAD_A)*/)
+	if (!m_pPlayer->isChange()) // 중력이 바뀌는 중이 아닐 때
 	{
-		//printf("left moving\n");
-		if (!m_pPlayer->move->IsRunning())
+		if (in->GetKey('A') == INPUTMGR_KEYDOWN || in->GetKey(VK_LEFT) == INPUTMGR_KEYDOWN) // 플레이어 '좌'이동
 			m_pPlayer->move->Start();
-		m_pPlayer->Move(-300 * eTime);
-	}
-	if (in->GetKey('A') == INPUTMGR_KEYUP || in->GetKey(VK_LEFT) == INPUTMGR_KEYUP)
-		m_pPlayer->move->Stop();
-
-	if (in->GetKey('D') == INPUTMGR_KEYDOWN || in->GetKey(VK_RIGHT) == INPUTMGR_KEYDOWN) // 플레이어 '우'이동
-		m_pPlayer->move->Start();
-	if (in->GetKey('D') == INPUTMGR_KEYON || in->GetKey(VK_RIGHT) == INPUTMGR_KEYON/* || (player1 -> IsConnected() && player1 -> GetState().Gamepad.wButtons & XINPUT_GAMEPAD_A)*/)
-	{
-		//printf("right moving\n");
-		if (!m_pPlayer->move->IsRunning())
-			m_pPlayer->move->Start();
-		m_pPlayer->Move(300 * eTime);
-	}
-	if (in->GetKey('D') == INPUTMGR_KEYUP || in->GetKey(VK_RIGHT) == INPUTMGR_KEYUP)
-		m_pPlayer->move->Stop();
-
-	if (in->GetKey('R') == INPUTMGR_KEYDOWN && (m_pPlayer->Pos().y == 548 || m_pPlayer->Pos().y == 0)) // 중.력.변.환(?)
-	{
-		if (m_pPlayer->Rot() == 180)
+		if (in->GetKey('A') == INPUTMGR_KEYON || in->GetKey(VK_LEFT) == INPUTMGR_KEYON/* || (player1 -> IsConnected() && player1 -> GetState().Gamepad.wButtons & XINPUT_GAMEPAD_A)*/)
 		{
-			m_pPlayer->isReverse(false);
-			m_pPlayer->SetRot(0);
+			//printf("left moving\n");
+			if (!m_pPlayer->move->IsRunning())
+				m_pPlayer->move->Start();
+			m_pPlayer->Move(-1 * speed * eTime);
 		}
-		else
+		if (in->GetKey('A') == INPUTMGR_KEYUP || in->GetKey(VK_LEFT) == INPUTMGR_KEYUP)
+			m_pPlayer->move->Stop();
+
+		if (in->GetKey('D') == INPUTMGR_KEYDOWN || in->GetKey(VK_RIGHT) == INPUTMGR_KEYDOWN) // 플레이어 '우'이동
+			m_pPlayer->move->Start();
+		if (in->GetKey('D') == INPUTMGR_KEYON || in->GetKey(VK_RIGHT) == INPUTMGR_KEYON/* || (player1 -> IsConnected() && player1 -> GetState().Gamepad.wButtons & XINPUT_GAMEPAD_A)*/)
 		{
-			m_pPlayer->isReverse(true);
-			m_pPlayer->SetRot(180);
+			//printf("right moving\n");
+			if (!m_pPlayer->move->IsRunning())
+				m_pPlayer->move->Start();
+			m_pPlayer->Move(speed * eTime);
+		}
+		if (in->GetKey('D') == INPUTMGR_KEYUP || in->GetKey(VK_RIGHT) == INPUTMGR_KEYUP)
+			m_pPlayer->move->Stop();
+
+		if (in->GetKey('W') == INPUTMGR_KEYDOWN || in->GetKey('W') == INPUTMGR_KEYON || in->GetKey(VK_UP) == INPUTMGR_KEYDOWN || in->GetKey(VK_UP) == INPUTMGR_KEYON/* || (player1 -> IsConnected() && player1 -> GetState().Gamepad.wButtons & XINPUT_GAMEPAD_A)*/)
+		{
+			m_pPlayer->Climb((speed - 100) * eTime);
+		}
+
+		if (in->GetKey('S') == INPUTMGR_KEYDOWN || in->GetKey('S') == INPUTMGR_KEYON || in->GetKey(VK_DOWN) == INPUTMGR_KEYDOWN || in->GetKey(VK_DOWN) == INPUTMGR_KEYON/* || (player1 -> IsConnected() && player1 -> GetState().Gamepad.wButtons & XINPUT_GAMEPAD_A)*/)
+		{
+			m_pPlayer->Climb(-1 * (speed - 100) * eTime);
+		}
+	}
+
+	if (in->GetKey('R') == INPUTMGR_KEYDOWN && (m_pPlayer->Pos().y == app->GetWindowHeight()-m_pPlayer->Height() || m_pPlayer->Pos().y == 0) && (box1->Pos().y == app->GetWindowHeight() - box1->Height() || box1->Pos().y == 0)) // 중.력.변.환(?)
+	{
+		if (rItem -> isReverseOn())
+		{
+			if (m_pPlayer->Rot() == 180)
+				m_pPlayer->isReverse(false);
+			else
+				m_pPlayer->isReverse(true);
 		}
 	}
 
 	if (in->GetKey('M') == INPUTMGR_KEYDOWN && sItem->isSmallOn())
 	{
-		m_pPlayer->setScale(0.5f, 0.5f);
-		this->SetWidth(m_pPlayer->normal->Width() / 2);
-		this->SetHeight(m_pPlayer->normal->Height() / 2);
+		if (m_pPlayer->isSmall())
+			m_pPlayer->isSmall(false);
+		else
+			m_pPlayer->isSmall(true);
 	}
 
 	if (in->GetKey('X') == INPUTMGR_KEYDOWN && gItem->isShootOn() && !isTheWorlded) // ときよ とまれ
@@ -205,7 +254,7 @@ void GameScene::Update(float eTime)
 
 	if (jItem->isJumpOn()) // 점프 아이템을 먹었을 경우
 	{
-		if (m_pPlayer->JumpNum < 2) // 점프를 할 수 있을 경우
+		if ((!m_pPlayer->isDoubleJump() && m_pPlayer->JumpNum < 1) || (m_pPlayer->isDoubleJump() && m_pPlayer->JumpNum < 2)) // 점프를 할 수 있을 경우
 		{
 			if (in->GetKey(VK_SPACE) == INPUTMGR_KEYDOWN/* || (player1 -> IsConnected() && player1 -> GetState().Gamepad.wButtons & XINPUT_GAMEPAD_A)*/) // 플레이어 점프 하기
 			{
@@ -235,28 +284,60 @@ void GameScene::Update(float eTime)
 		}
 	}
 
+	if (djItem->isDoubleJumpOn()) // 더블 점프 아이템을 먹었을 경우
+		m_pPlayer->isDoubleJump(true);
+
 	//여기서 부턴 충돌 판정들
 
-	if (circleCollision(m_pPlayer, jItem)) // 플레이어와 점프 아이템 충돌
-	{
+	if (rectangleCollision(m_pPlayer, jItem)) // 플레이어와 점프 아이템 충돌
 		jItem->isJumpOn(true);
-		//printf("BOOM\n");
-	}
 
-	if (circleCollision(m_pPlayer, gItem)) // 플레이어와 총 아이템 충돌
-	{
+	if (rectangleCollision(m_pPlayer, gItem)) // 플레이어와 총 아이템 충돌
 		gItem->isShootOn(true);
-	}
 
-	if (circleCollision(m_pPlayer, sItem)) // 플레이어와 땅콩 아이템 충돌
-	{
+	if (rectangleCollision(m_pPlayer, rItem)) // 플레이어와 리버스 아이템 충돌
+		rItem->isReverseOn(true);
+
+	if (rectangleCollision(m_pPlayer, djItem)) // 플레이어와 더블 점프 아이템 충돌
+		djItem->isDoubleJumpOn(true);
+
+	if (rectangleCollision(m_pPlayer, sItem)) // 플레이어와 땅콩 아이템 충돌
 		sItem->isSmallOn(true);
+
+	if (rectangleCollision(m_pPlayer, switcH)) // 플레이어와 스위치 아이템 충돌
+		switcH->isOn(true);
+
+	if (IsExistScene(monster))
+	{
+		if (rectangleCollision(m_pPlayer, monster)) // 플레이어와 몬스터 충돌
+			monster->isContacted(true);
+		else
+			monster->isContacted(false);
+
+		for (int i = 0; i < 5; i++)
+		{
+			if (IsExistScene(bullet[i])) // 총알이 존재하는지 검사
+			{
+				if (rectangleCollision(bullet[i], monster)) // 총알과 몬스터 충돌
+				{
+					PopScene(monster);
+					PopScene(bullet[i]);
+				}
+			}
+		}
 	}
 
-	if (circleCollision(m_pPlayer, switcH)) // 플레이어와 스위치 아이템 충돌
-	{
-		switcH->isOn(true);
-	}
+	//if (playerAndLadder->isIntersected()) // 플레이어와 사다리 충돌
+	//{
+	//	m_pPlayer->isClimb(true);
+	//}
+
+
+	//if (IntersectRect(&t, &r1, &r2) && in->GetKey(MK_LBUTTON) == INPUTMGR_KEYDOWN) // 와 마우스 클릭이에요!
+	//{
+	//	gItem->isShootOn(true);
+	//	ZeroSceneMgr->ChangeScene(new BlankSceneExit(), TR::Fade, 1);
+	//}
 }
 
 void GameScene::Render()
@@ -267,9 +348,14 @@ void GameScene::Render()
 	b -> Render();
 	c -> Render();
 	gradient -> Render();*/
+
 	bg1 -> Render();
 	bg2 -> Render();
 	bg3 -> Render();
+
+
+	monster->Render();
+
 
 	for (int j=0; j<5; j++)
 		if (IsExistScene(bullet[j]))
@@ -281,12 +367,19 @@ void GameScene::Render()
 	if (IsExistScene(gItem))
 		gItem->Render();
 
+	if (IsExistScene(rItem))
+		rItem->Render();
+
+	if (IsExistScene(djItem))
+		djItem->Render();
+
 	if (IsExistScene(sItem))
 		sItem->Render();
 
 	switcH->Render();
 
-	box->Render();
+	box1->Render();
+	box2->Render();
 
 	if (theWorld)
 	{
@@ -299,7 +392,15 @@ void GameScene::Render()
 
 void GameScene::PushBullet(float x, float y)
 {
-	for (int i = 0; i < 5; i++) // 총알 씬이 존재하지 않을 경우 그 배열 순서의 총알을 쏠 수 있음
+	if (m_pPlayer->isSmall()) // 작아졌을 때 총알 발사 좌표
+	{
+		if (x > m_pPlayer->Pos().x) // 오른쪽으로 발사 될때
+			x -= 20.f;
+		else
+			x += 20.f;
+		y += 70.f;
+	}
+	for (int i = 0; i < 5; i++) // 총알 씬이 존재하지 않을    m경우 그 배  열 순서의 총알을 쏠 수 있음
 	{
 		if (!(IsExistScene(bullet[i])))
 		{
@@ -320,22 +421,68 @@ void GameScene::PushBullet(float x, float y)
 	}
 }
 
-bool GameScene::circleCollision(ZeroIScene *r1, ZeroIScene *r2)
+bool GameScene::rectangleCollision(Player *_r1, ZeroIScene *_r2)
 {
-	r1_x = r1->Pos().x + r1->ScalingCenter().x;
-	r1_y = r1->Pos().y + r1->ScalingCenter().y;
-	r2_x = r2->Pos().x + r2->ScalingCenter().x;
-	r2_y = r2->Pos().y + r2->ScalingCenter().y;
+	if (_r1->isSmall()) // 작아졌을 때
+	{
+		R1.left = _r1->Pos().x + 50;
+		R1.top = _r1->Pos().y + _r1->Height() / 2;
+		R1.right = _r1->Pos().x + _r1->Width() - 50;
+		R1.bottom = _r1->Pos().y + _r1->Height();
+	}
+	else // 원래대로 일 때
+	{
+		R1.left = _r1->Pos().x + 40;
+		R1.top = _r1->Pos().y;
+		R1.right = _r1->Pos().x + _r1->Width() - 40;
+		R1.bottom = _r1->Pos().y + _r1->Height();
+	}
 
-	//printf("r1_x : %f\tr1_y : %f\nr2_x : %f\tr2_y : %f\nl : %f\n", r1_x, r1_y, r2_x, r2_y, l);
+	R2.left = _r2->Pos().x;
+	R2.top = _r2->Pos().y;
+	R2.right = _r2->Pos().x + _r2->Width();
+	R2.bottom = _r2->Pos().y + _r2->Height();
 
-	l = sqrtf(powf((r2_x - r1_x), 2) + pow((r2_y - r1_y), 2));
-
-	if (l < 0)
-		l *= -1;
-	
-	if (r1->ScalingCenter().x + r2->ScalingCenter().x >= l)
+	if (IntersectRect(&temp, &R1, &R2))
 		return true;
 	else
 		return false;
 }
+
+bool GameScene::rectangleCollision(Bullet *_r1, ZeroIScene *_r2)
+{
+	R1.left = _r1->Pos().x;
+	R1.top = _r1->Pos().y;
+	R1.right = _r1->Pos().x + _r1->Width();
+	R1.bottom = _r1->Pos().y + _r1->Height();
+
+	R2.left = _r2->Pos().x;
+	R2.top = _r2->Pos().y;
+	R2.right = _r2->Pos().x + _r2->Width();
+	R2.bottom = _r2->Pos().y + _r2->Height();
+
+	if (IntersectRect(&temp, &R1, &R2))
+		return true;
+	else
+		return false;
+}
+
+//bool GameScene::circleCollision(Player *r1, ZeroIScene *r2)
+//{
+//	r1_x = r1->Pos().x + r1->Width()/2;
+//	r1_y = r1->Pos().y + r1->Height()/2;
+//	r2_x = r2->Pos().x + r2->Width() / 2;
+//	r2_y = r2->Pos().y + r2->Height() / 2;
+//
+//	//printf("r1_x : %f\tr1_y : %f\nr2_x : %f\tr2_y : %f\nl : %f\n", r1_x, r1_y, r2_x, r2_y, l);
+//
+//	l = sqrtf(powf((r2_x - r1_x), 2) + pow((r2_y - r1_y), 2));
+//
+//	if (l < 0)
+//		l *= -1;
+//	
+//	if (r1->Width() / 2 - 20 + r2->Width() / 2 >= l)
+//		return true;
+//	else
+//		return false;
+//}

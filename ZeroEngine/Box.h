@@ -1,16 +1,18 @@
 #pragma once
 #include <Zero.h>
+#include "Çì´õ.h"
 
 class Box : public ZeroIScene
 {
+private:
+	float SeTime;
 public:
 	ZeroSprite *box;
-	ZeroIScene *target;
+	Player *player;
 public:
-	Box(ZeroIScene *_target);
+	Box(Player *_player);
 	~Box();
 
 	virtual void Update(float eTime);
 	virtual void Render();
 };
-

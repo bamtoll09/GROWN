@@ -2,9 +2,11 @@
 #include <Windows.h>
 #include <Zero.h>
 #include "GameScene.h"
+#include "BlankScene.h"
+#include "resource.h"
 
 //이 변수를 주석처리하면 콘솔창 안뜬다.
-ZeroConsole g_Console;  
+//ZeroConsole g_Console;  
 
 INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR, INT )
 {
@@ -32,9 +34,16 @@ INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR, INT )
 
         ShowWindow( hWnd, SW_SHOWDEFAULT );
         UpdateWindow( hWnd );
+		
+		auto cursor = LoadCursorFromFile(L"Texture/cursor.cur");
+		SetClassLong(hWnd, GCL_HCURSOR, (DWORD)cursor);
+
+		//wc.hIcon = LoadIcon(hInst, (LPCTSTR)IDI_ICON1);
+		HICON hIcon = (HICON)LoadIcon(hInst, MAKEINTRESOURCE(IDI_ICON1));//リソ?スから
+		SendMessage(hWnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon);
 
         //여기서 처음 시작하는 Scene을 정한다
-		ZeroSceneMgr->ChangeScene(new GameScene());
+		ZeroSceneMgr->ChangeScene(new GameScene(), TR::Fade);
 
 
         MSG msg;

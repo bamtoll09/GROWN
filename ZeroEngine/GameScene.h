@@ -1,5 +1,6 @@
 #pragma once
 #include <Zero.h>
+#include "ZeroTrfade.h"
 #include "Çì´õ.h"
 
 //#include "CXBOXController.h"
@@ -9,29 +10,36 @@ class GameScene : public ZeroIScene
 private:
 	int i, _i, db;
 	float bulletTime, r1_x, r1_y, r2_x, r2_y, l, theWorld;
+	float speed;
 	float SeTime;
 	float jumpH;
 	float maxJumpH;
 	bool isTheWorlded;
 
 	void PushBullet(float x, float y);
-	bool circleCollision(ZeroIScene *r1, ZeroIScene *r2);
+	//bool circleCollision(Player *r1, ZeroIScene *r2);
+	bool rectangleCollision(Player *_r1, ZeroIScene *_r2);
+	bool rectangleCollision(Bullet *_r1, ZeroIScene *_r2);
 private:
 	ZeroApplication *app;
 	ZeroInputManager *in;
 	ZeroCameraManager *camera;
 	ZeroSoundManager *sound;
+	ZeroTrFade *main;
+
 	//ZeroSprite *a, *b, *c;
 	//ZeroSprite *gradient;
 	ZeroSprite *bg1, *bg2, *bg3, *TW, *GRAY;
 	
 	Player *m_pPlayer;
 	Bullet *bullet[5];
-	Item *jItem, *gItem, *rItem, *sItem;
+	Monster *monster;
+	Item *jItem, *gItem, *rItem, *djItem, *sItem;
 	Switch *switcH;
-	Box *box;
+	Box *box1, *box2;
+	Ladder *ladder;
 
-	//RECT jItemRect, playerRect, tempRect;
+	RECT R1, R2, temp;
 
 	//CXBOXController *player1;
 public:

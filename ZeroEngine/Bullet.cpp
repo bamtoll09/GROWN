@@ -6,6 +6,8 @@ Bullet::Bullet(void)
 	:available(true), speed(500.f), update(true)
 {
 	bullet = new ZeroSprite("%s", "exresource/bullet.png");
+	this->SetWidth(bullet->Width());
+	this->SetHeight(bullet->Height());
 	PushScene(bullet);
 }
 
