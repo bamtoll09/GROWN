@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include <Windows.h>
 #include <Zero.h>
-#include "GameScene.h"
+#include "StartScene.h"
 #include "BlankScene.h"
 #include "resource.h"
 
@@ -43,7 +43,7 @@ INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR, INT )
 		SendMessage(hWnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon);
 
         //여기서 처음 시작하는 Scene을 정한다
-		ZeroSceneMgr->ChangeScene(new GameScene(), TR::Fade);
+		ZeroSceneMgr->ChangeScene(new StartScene(), TR::Fade);
 
 
         MSG msg;

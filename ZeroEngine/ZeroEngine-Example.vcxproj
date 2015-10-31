@@ -118,6 +118,7 @@
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="StartScene.h" />
     <ClInclude Include="Switch.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="헤더.h" />
@@ -135,6 +136,7 @@
     <ClCompile Include="MapMaker.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="StartScene.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -148,6 +150,10 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Texture\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Map\stage1_1.dat" />
+    <None Include="Map\start.dat" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

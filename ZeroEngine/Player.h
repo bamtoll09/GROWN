@@ -5,7 +5,8 @@ class Player : public ZeroIScene
 {
 private:
 	float scaleX, scaleY;
-	bool moving, jumping, falling, shooting, reversing, doubleJumping, smalling, changing, onBox, climbing, reading;
+	bool onBox, onGround;
+	bool moving, jumping, falling, shooting, reversing, doubleJumping, smalling, changing, climbing, reading;
 public:
 	ZeroSprite *normal, *shoot, *fall, *jump, *jump2, *read;
 	ZeroAnimation *move;
@@ -31,9 +32,10 @@ public:
 	void isReverse(bool tr);
 	void isSmall(bool tr);
 	void isChange(bool tr);
-	void isOnBox(bool tr);
 	void isClimb(bool tr);
 	void isRead(bool tr);
+	void isOnBox(bool tr);
+	void isOnGround(bool tr);
 
 	bool isJump();
 	bool isFall();
@@ -42,8 +44,9 @@ public:
 	bool isDoubleJump();
 	bool isSmall();
 	bool isChange();
-	bool isOnBox();
 	bool isClimb();
 	bool isRead();
+	bool isOnBox();
+	bool isOnGround();
 };
 

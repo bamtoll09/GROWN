@@ -421,7 +421,7 @@ void GameScene::PushBullet(float x, float y)
 	}
 }
 
-bool GameScene::rectangleCollision(Player *_r1, ZeroIScene *_r2)
+bool GameScene::rectangleCollision(Player *_r1, ZeroIScene *_r2) // 플레이어 충돌 판정
 {
 	if (_r1->isSmall()) // 작아졌을 때
 	{
@@ -449,7 +449,7 @@ bool GameScene::rectangleCollision(Player *_r1, ZeroIScene *_r2)
 		return false;
 }
 
-bool GameScene::rectangleCollision(Bullet *_r1, ZeroIScene *_r2)
+bool GameScene::rectangleCollision(Bullet *_r1, ZeroIScene *_r2) // 총알 충돌 판정
 {
 	R1.left = _r1->Pos().x;
 	R1.top = _r1->Pos().y;
@@ -467,12 +467,100 @@ bool GameScene::rectangleCollision(Bullet *_r1, ZeroIScene *_r2)
 		return false;
 }
 
+void GameScene::boxCollision(Player *_r1, Box *_r2) // 플레이어와 상자 충돌 판정
+{
+	if (_r1->isSmall()) // 작아졌을 때
+	{
+		LEFT.left = _r1->Pos().x + 50; // 왼쪽 RECT
+		LEFT.top = _r1->Pos().y + _r1->Height() / 2;
+		LEFT.right = _r1->Pos().x + _r1->Width() / 2;
+		LEFT.bottom = _r1->Pos().y + _r1->Height();
+
+		RIGHT.left = _r1->Pos().x + _r1->Width() / 2; // 오른쪽 RECT
+		RIGHT.top = _r1->Pos().y + _r1->Height() / 2;
+		RIGHT.right = _r1->Pos().x + _r1->Width() - 50;
+		RIGHT.bottom = _r1->Pos().y + _r1->Height();
+	}
+	else // 원래대로 일 때
+	{
+		LEFT.left = _r1->Pos().x + 40; // 왼쪽 RECT
+		LEFT.top = _r1->Pos().y;
+		LEFT.right = _r1->Pos().x + _r1->Width() / 2;
+		LEFT.bottom = _r1->Pos().y + _r1->Height();
+
+		RIGHT.left = _r1->Pos().x + _r1->Width() / 2; // 오른쪽 RECT
+		RIGHT.top = _r1->Pos().y;
+		RIGHT.right = _r1->Pos().x + _r1->Width() - 40;
+		RIGHT.bottom = _r1->Pos().y + _r1->Height();
+	}
+
+	R2.left = _r2->Pos().x;
+	R2.top = _r2->Pos().y;
+	R2.right = _r2->Pos().x + _r2->Width();
+	R2.bottom = _r2->Pos().y + _r2->Height();
+
+	if (IntersectRect(&temp, &LEFT, &R2))
+		return _r2->isLeftPushed(true);
+	else if (IntersectRect(&temp, &RIGHT, &R2))
+		return _r2->isRightPushed(true);
+	else
+	{
+		_r2->isLeftPushed(false);
+		_r2->isRightPushed(false);
+		return;
+	}
+}
+
+void GameScene::tileCollision(Player *_r1, Tile *_r2) // 플레이어와 타일 충돌 판정
+{
+	if (_r1->isSmall()) // 작아졌을 때
+	{
+		LEFT.left = _r1->Pos().x + 50; // 왼쪽 RECT
+		LEFT.top = _r1->Pos().y + _r1->Height() / 2;
+		LEFT.right = _r1->Pos().x + _r1->Width() / 2;
+		LEFT.bottom = _r1->Pos().y + _r1->Height();
+
+		RIGHT.left = _r1->Pos().x + _r1->Width() / 2; // 오른쪽 RECT
+		RIGHT.top = _r1->Pos().y + _r1->Height() / 2;
+		RIGHT.right = _r1->Pos().x + _r1->Width() - 50;
+		RIGHT.bottom = _r1->Pos().y + _r1->Height();
+	}
+	else // 원래대로 일 때
+	{
+		LEFT.left = _r1->Pos().x + 40; // 왼쪽 RECT
+		LEFT.top = _r1->Pos().y;
+		LEFT.right = _r1->Pos().x + _r1->Width() / 2;
+		LEFT.bottom = _r1->Pos().y + _r1->Height();
+
+		RIGHT.left = _r1->Pos().x + _r1->Width() / 2; // 오른쪽 RECT
+		RIGHT.top = _r1->Pos().y;
+		RIGHT.right = _r1->Pos().x + _r1->Width() - 40;
+		RIGHT.bottom = _r1->Pos().y + _r1->Height();
+	}
+
+	R2.left = _r2->Pos().x;
+	R2.top = _r2->Pos().y;
+	R2.right = _r2->Pos().x + _r2->Width();
+	R2.bottom = _r2->Pos().y + _r2->Height();
+
+	if (IntersectRect(&temp, &LEFT, &R2))
+		return _r2->isLeftPushed(true);
+	else if (IntersectRect(&temp, &RIGHT, &R2))
+		return _r2->isRightPushed(true);
+	else
+	{
+		_r2->isLeftPushed(false);
+		_r2->isRightPushed(false);
+		return;
+	}
+}
+
 //bool GameScene::circleCollision(Player *r1, ZeroIScene *r2)
 //{
 //	r1_x = r1->Pos().x + r1->Width()/2;
 //	r1_y = r1->Pos().y + r1->Height()/2;
 //	r2_x = r2->Pos().x + r2->Width() / 2;
-//	r2_y = r2->Pos().y + r2->Height() / 2;
+//	r2_y = r2->Pos().y +Height r2->() / 2;
 //
 //	//printf("r1_x : %f\tr1_y : %f\nr2_x : %f\tr2_y : %f\nl : %f\n", r1_x, r1_y, r2_x, r2_y, l);
 //

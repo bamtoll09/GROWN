@@ -1,11 +1,15 @@
 #pragma once
 
-#include "Player.h"
-#include "Bullet.h"
-#include "Item.h"
-#include "Switch.h"
+#include "Bear.h"
 #include "Box.h"
+#include "Bullet.h"
 #include "Door.h"
-#include "Monster.h"
-#include "Ladder.h"
 #include "Intersect.h"
+#include "Item.h"
+#include "Ladder.h"
+#include "MapMaker.h"
+#include "Monster.h"
+#include "Player.h"
+#include "Switch.h"
+#include "Tile.h"
+#include <Windows.h>

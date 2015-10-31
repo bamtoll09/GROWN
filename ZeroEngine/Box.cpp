@@ -128,3 +128,27 @@ void Box::Render()
 	ZeroIScene::Render();
 	box->Render();
 }
+
+void Box::isLeftPushed(bool tr)
+{
+	this->leftPushed = tr;
+}
+void Box::isRightPushed(bool tr)
+{
+	this->rightPushed = tr;
+}
+
+bool Box::isLeftPushed()
+{
+	return this->leftPushed;
+}
+
+bool Box::isRightPushed()
+{
+	return this->rightPushed;
+}
+
+bool Box::isOnGround()
+{
+	return this->rightPushed;
+}

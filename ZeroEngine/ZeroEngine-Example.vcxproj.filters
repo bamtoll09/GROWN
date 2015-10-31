@@ -70,6 +70,9 @@
     <Filter Include="Scene\GameScene\1-3">
       <UniqueIdentifier>{380b42f3-d362-41f1-9506-ff88874cbaac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{9c80bf64-1ceb-4013-8f9c-9a7a60c21596}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\ZeroEngine\ZeroEngine\stdafx.h">
@@ -126,6 +129,9 @@
     <ClInclude Include="Bear.h">
       <Filter>Custom\Bear</Filter>
     </ClInclude>
+    <ClInclude Include="StartScene.h">
+      <Filter>Scene\GameScene\StartScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -174,11 +180,26 @@
     <ClCompile Include="Bear.cpp">
       <Filter>Custom\Bear</Filter>
     </ClCompile>
+    <ClCompile Include="StartScene.cpp">
+      <Filter>Scene\GameScene\StartScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="ZeroEngine-Example.rc" />
+    <Image Include="Texture\icon.ico">
+      <Filter>리소스</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Texture\icon.ico" />
+    <ResourceCompile Include="ZeroEngine-Example.rc">
+      <Filter>리소스</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Map\stage1_1.dat">
+      <Filter>Map</Filter>
+    </None>
+    <None Include="Map\start.dat">
+      <Filter>Map</Filter>
+    </None>
   </ItemGroup>
 </Project>

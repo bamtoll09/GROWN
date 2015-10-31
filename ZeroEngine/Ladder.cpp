@@ -2,7 +2,7 @@
 #include "Ladder.h"
 
 
-Ladder::Ladder(Player _player)
+Ladder::Ladder(Player *_player)
 {
 	player = _player;
 

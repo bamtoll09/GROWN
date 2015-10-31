@@ -1,11 +1,12 @@
 #pragma once
 #include <Zero.h>
-#include "Çì´õ.h"
+#include "Player.h"
 
 class Box : public ZeroIScene
 {
 private:
 	float SeTime;
+	bool leftPushed, rightPushed, onGround;
 public:
 	ZeroSprite *box;
 	Player *player;
@@ -15,4 +16,12 @@ public:
 
 	virtual void Update(float eTime);
 	virtual void Render();
+
+	void isLeftPushed(bool tr);
+	void isRightPushed(bool tr);
+	void isOnGround(bool tr);
+
+	bool isLeftPushed();
+	bool isRightPushed();
+	bool isOnGround();
 };

@@ -344,11 +344,6 @@ void Player::isChange(bool tr)
 	this->changing = tr;
 }
 
-void Player::isOnBox(bool tr)
-{
-	this->onBox = tr;
-}
-
 void Player::isClimb(bool tr)
 {
 	this->climbing = tr;
@@ -357,6 +352,16 @@ void Player::isClimb(bool tr)
 void Player::isRead(bool tr)
 {
 	this->reading = tr;
+}
+
+void Player::isOnBox(bool tr)
+{
+	this->onBox = tr;
+}
+
+void Player::isOnGround(bool tr)
+{
+	this->onGround = tr;
 }
 
 
@@ -397,11 +402,6 @@ bool Player::isChange()
 	return this->changing;
 }
 
-bool Player::isOnBox()
-{
-	return this->onBox;
-}
-
 bool Player::isClimb()
 {
 	return this->climbing;
@@ -410,4 +410,14 @@ bool Player::isClimb()
 bool Player::isRead()
 {
 	return this->reading;
+}
+
+bool Player::isOnBox()
+{
+	return this->onBox;
+}
+
+bool Player::isOnGround()
+{
+	return this->onGround;
 }
