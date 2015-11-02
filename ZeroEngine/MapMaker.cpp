@@ -2,12 +2,18 @@
 #include "MapMaker.h"
 
 
-MapMaker::MapMaker(int _stage, int _w, int _h, Player *_player, Door *_door[5], Tile *_border[1500]/*= NULL*/)
+MapMaker::MapMaker(int _stage, int _w, int _h, Player *_player, Ladder *_ladder, Door *_door[5], Tile *_border[1500]/*= NULL*/)
 	:n(0), o(0)
 {
 	player = _player;
-	for (int i = 0; i < 1500; i++)
-		border[i] = _border[i];
+	ladder = _ladder;
+
+	if (_border != NULL)
+		for (int i = 0; i < 1500; i++)
+			border[i] = _border[i];
+	else
+		border[0] = NULL;
+
 	for (int i = 0; i < 5; i++)
 		door[i] = _door[i];
 	stage = _stage;
@@ -38,14 +44,19 @@ MapMaker::MapMaker(int _stage, int _w, int _h, Player *_player, Door *_door[5], 
 	{
 		for (int j = 0; j < w; j++)
 		{
-			if (stages[i][j] == 1)
+			if (border[0] != NULL)
 			{
-				border[n]->SetPos(j * 11, i * 10);
-				n++;
+				if (stages[i][j] == 1)
+				{
+					border[n]->SetPos(j * 11, i * 10);
+					n++;
+				}
 			}
 			else if (stages[i][j] == 2)
 				player->SetPos(j * 11, i * 10);
-			else if (stages[i][j] == 3)
+			else if (stages[i][j] == 4)
+				ladder->SetPos(j * 11, i * 10);
+			else if (stages[i][j] == 8)
 			{
 				door[o]->SetPos(j * 11, i * 10);
 				o++;

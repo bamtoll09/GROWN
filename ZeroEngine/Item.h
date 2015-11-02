@@ -5,9 +5,15 @@ class Item : public ZeroIScene
 {
 private:
 	int itemNum;
-	bool jumpOn, shootOn, reverseOn, doubleJumpOn, smallOn;
+	int save[10];
+	bool jumpOn, shootOn, reverseOn, doubleJumpOn, smallOn, theWorldOn;
+
+	void loadSaveFile();
+	void saveFile();
 public:
 	ZeroSprite *item;
+
+	FILE *f;
 public:
 	Item(int no);
 	~Item(void);
@@ -29,4 +35,7 @@ public:
 
 	bool isSmallOn();
 	void isSmallOn(bool tf);
+
+	bool isTheWorldOn();
+	void isTheWorldOn(bool tf);
 };

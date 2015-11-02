@@ -2,11 +2,12 @@
 #include "Intersect.h"
 #include <math.h>
 
-Intersect::Intersect(ZeroIScene *_r1, ZeroIScene *_r2, bool _Circle/* = false*/, ZeroInputManager *_in/* = NULL*/)
+Intersect::Intersect(ZeroIScene *_r1/* = NULL*/, ZeroIScene *_r2/* = NULL*/, ZeroSprite *_r3/* = NULL*/, bool _Circle/* = false*/, ZeroInputManager *_in/* = NULL*/)
 	: state(false)
 {
 	r1 = _r1;
 	r2 = _r2;
+	r3 = _r3;
 	circle = _Circle;
 	cursor = _in;
 	CURSOR = cursor->GetClientRect();
@@ -25,7 +26,7 @@ void Intersect::Update(float eTime)
 	else if (cursor == NULL)
 		rectangleCollision(r1, r2);
 	else
-		cursorCollision(CURSOR, r1);
+		cursorCollision(&CURSOR, r3);
 }
 
 void Intersect::Render()
@@ -76,14 +77,14 @@ bool Intersect::circleCollision(ZeroIScene *_r1, ZeroIScene *_r2)
 		return state = false;
 }
 
-bool Intersect::cursorCollision(RECT _r1, ZeroIScene *_r2)
+bool Intersect::cursorCollision(RECT *_r1, ZeroSprite *_r2)
 {
-	R1 = _r1;
+	R1 = *_r1;
 
 	R2.left = _r2->Pos().x;
 	R2.top = _r2->Pos().y;
 	R2.right = _r2->Pos().x + _r2->Width();
-	R2.bottom = _r2->Pos().y + _r2->Width();
+	R2.bottom = _r2->Pos().y + _r2->Height();
 
 	if (IntersectRect(&temp, &R1, &R2))
 		return state = true;

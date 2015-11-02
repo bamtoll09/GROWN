@@ -1,8 +1,7 @@
 #include "stdafx.h"
 #include <Windows.h>
 #include <Zero.h>
-#include "StartScene.h"
-#include "BlankScene.h"
+#include "Scene.h"
 #include "resource.h"
 
 //이 변수를 주석처리하면 콘솔창 안뜬다.
@@ -23,7 +22,7 @@ INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR, INT )
 
     // WS_EX_TOPMOST | WS_POPUP :: 전체화면 모드
     // WS_OVERLAPPEDWINDOW      :: 창화면	
-    HWND hWnd = CreateWindow( L"Engine2D", L"연습", 
+    HWND hWnd = CreateWindow( L"Engine2D", L"GROWN", 
                               WS_OVERLAPPEDWINDOW , 100, 0, WindowWidth, WindowHeight,
                               GetDesktopWindow(), NULL, wc.hInstance, NULL );
 
@@ -43,7 +42,7 @@ INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR, INT )
 		SendMessage(hWnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon);
 
         //여기서 처음 시작하는 Scene을 정한다
-		ZeroSceneMgr->ChangeScene(new StartScene(), TR::Fade);
+		ZeroSceneMgr->ChangeScene(new BlankScene<MainScene>(1.f, 0.5f), TR::Fade, 1.f);
 
 
         MSG msg;

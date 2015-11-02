@@ -3,9 +3,20 @@
 
 Player::Player(void)
 	:scaleX(1.f), scaleY(1.f), moving(false), left(false), jumping(false), shooting(false), reversing(false),
-	doubleJumping(false), smalling(false), changing(false), onBox(false), climbing(false), reading(false),
-	jumpH(600.f), JeTime(0.f), GeTime(0.f), JumpNum(0)
+	doubleJumping(false), smalling(false), changing(false), climbing(false), reading(false), downJumping(false),
+	onBox(false), onGround(false), jumpH(600.f), JeTime(0.f), GeTime(0.f), JumpNum(0), MaxLeft(0), MaxRight(0)
 {
+	f = fopen("Save\\save.dat", "r");
+	
+	for (int i = 0; i < 7; i++)
+		fscanf(f, "%d", &save[i]);
+
+	fclose(f);
+
+	sound = ZeroSoundMgr;
+	sound->PushSound("Sound/jump.mp3", "jumpSound");
+	sound->PushSound("Sound/doublejump.mp3", "djumpSound");
+
 	normal = new ZeroSprite("Texture/Player/0.png");
 	PushScene(normal);
 
@@ -69,10 +80,10 @@ void Player::Update(float eTime)
 		}
 
 
-		if (m_vPos.x <= 0) // 플레이어가 맵 끝에 도달 했을 때 못나오게 유지
-			SetPosX(0);
-		if (m_vPos.x >= 2942)
-			SetPosX(2942);
+		if (this->Pos().x <= MaxLeft) // 플레이어가 맵 끝에 도달 했을 때 못나오게 유지
+			SetPosX(MaxLeft);
+		if (this->Pos().x >= MaxRight)
+			SetPosX(MaxRight);
 
 		if (shooting) // 플레이어가 총을 쏠 시 반동같지 않은 반동에 의해 살짝 멈춤
 		{
@@ -181,8 +192,16 @@ void Player::Update(float eTime)
 				this->SetScale(scaleX, scaleY);
 			}
 
-			if (jumping)
+			if (climbing)
 			{
+				jumping = false;
+				JumpNum = 0;
+				JeTime = 0.f;
+			}
+
+			if (jumping && !climbing)
+			{
+				onGround = false;
 				if (JumpNum == 1) // 플레이어가 점프했을 때
 				{
 					if ((jumpH - JeTime) >= 0.f && JeTime < 650.f)
@@ -199,6 +218,7 @@ void Player::Update(float eTime)
 
 				if (doubleJumping && JumpNum == 2) // 더블 점프 시
 				{
+					onGround = false;
 					if ((jumpH - JeTime) >= 0.f && JeTime < 650.f)
 					{
 						this->AddPosY(-1 * (jumpH - JeTime) * eTime);
@@ -212,21 +232,57 @@ void Player::Update(float eTime)
 				}
 			}
 
-			else if (falling)
+			else if (falling && !climbing && !downJumping)
 			{
-				if (Pos().y < ZeroApplication::Instance()->GetWindowHeight() - this->Height())
+				if (save[6] == 00)
 				{
-					this->AddPosY((jumpH - JeTime) * eTime);
-					JeTime -= 30.f;
+					if (this->Pos().y < 792 - this->Height())
+					{
+						this->AddPosY((jumpH - JeTime) * eTime);
+						JeTime -= 30.f;
+					}
+					else if (this->Pos().y < 1490 - this->Height() && this->Pos().y + this->Height() > 812)
+					{
+						this->AddPosY((jumpH - JeTime) * eTime);
+						JeTime -= 30.f;
+					}
+					else if (this->Pos().y < 2190 - this->Height() && this->Pos().y + this->Height() > 1512)
+					{
+						this->AddPosY((jumpH - JeTime) * eTime);
+						JeTime -= 30.f;
+					}
+					else if (this->Pos().y < 2890 - this->Height() && this->Pos().y + this->Height() > 2212)
+					{
+						this->AddPosY((jumpH - JeTime) * eTime);
+						JeTime -= 30.f;
+					}
+				}
+				else if (save[6] == 11)
+				{
+					if (this->Pos().y < 1152 - 80 - this->Height())
+					{
+						this->AddPosY((jumpH - JeTime) * eTime);
+						JeTime -= 30.f;
+					}
 				}
 			}
 
-			else if (Pos().y < 548) // 공중에 있을 시 바닥으로 슈우우웅
-			{
+			else if (!onGround && (!climbing || downJumping)) // 공중에 있을 시 바닥으로 슈우우웅
+			{/*
 				if (!changing && !onBox)
-					changing = true;
+					changing = true;*/
 				this->AddPosY(JeTime * eTime);
 				JeTime += 30.f;
+			}
+
+			if (onGround) // 플레이어가 바닥에 착지
+			{
+				falling = false;
+				jumping = false;
+				changing = false;
+				downJumping = false;
+				JeTime = 0.f;
+				JumpNum = 0;
 			}
 
 			if (shooting)
@@ -237,18 +293,6 @@ void Player::Update(float eTime)
 					shooting = false;
 					GeTime = 0.f;
 				}
-			}
-
-			if (this->Pos().y >= 548) // 플레이어가 점프시 바닥에 착지
-			{
-				this->SetPosY(548);
-				if (jumping)
-					jumping = false;
-				falling = false;
-				JeTime = 0.f;
-				JumpNum = 0;
-				if (changing)
-					changing = false;
 			}
 		}
 	}
@@ -270,10 +314,10 @@ void Player::Render()
 	else if (doubleJumping && JumpNum == 2 && !falling)
 		jump2->Render();
 
-	else if (falling && !onBox)
+	else if (falling && !onBox && !onGround && !climbing)
 		fall->Render();
 
-	else if (moving)
+	else if (moving || climbing)
 	{
 		move->Render();
 		moving = false;
@@ -307,6 +351,11 @@ void Player::Climb(float _dx)
 	{
 		this->AddPosY(_dx);
 	}
+}
+
+void Player::isMove(bool tr)
+{
+	this->moving = tr;
 }
 
 void Player::isJump(bool tr)
@@ -354,6 +403,11 @@ void Player::isRead(bool tr)
 	this->reading = tr;
 }
 
+void Player::isDownJump(bool tr)
+{
+	this->downJumping = tr;
+}
+
 void Player::isOnBox(bool tr)
 {
 	this->onBox = tr;
@@ -366,6 +420,11 @@ void Player::isOnGround(bool tr)
 
 
 
+
+bool Player::isMove()
+{
+	return this->moving;
+}
 
 bool Player::isJump()
 {
@@ -410,6 +469,11 @@ bool Player::isClimb()
 bool Player::isRead()
 {
 	return this->reading;
+}
+
+bool Player::isDownJump()
+{
+	return this->downJumping;
 }
 
 bool Player::isOnBox()

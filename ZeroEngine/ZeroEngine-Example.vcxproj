@@ -114,14 +114,18 @@
     <ClInclude Include="Intersect.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Ladder.h" />
+    <ClInclude Include="MainScene.h" />
     <ClInclude Include="MapMaker.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="Stage1_1.h" />
+    <ClInclude Include="Stage1_2.h" />
     <ClInclude Include="StartScene.h" />
     <ClInclude Include="Switch.h" />
     <ClInclude Include="Tile.h" />
-    <ClInclude Include="헤더.h" />
+    <ClInclude Include="Object.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bear.cpp" />
@@ -133,9 +137,12 @@
     <ClCompile Include="Intersect.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Ladder.cpp" />
+    <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="MapMaker.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Stage1_1.cpp" />
+    <ClCompile Include="Stage1_2.cpp" />
     <ClCompile Include="StartScene.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -154,6 +161,7 @@
   <ItemGroup>
     <None Include="Map\stage1_1.dat" />
     <None Include="Map\start.dat" />
+    <None Include="Save\save.dat" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

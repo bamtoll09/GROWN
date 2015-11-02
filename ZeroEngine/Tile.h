@@ -8,10 +8,14 @@ class Tile :
 private:
 	int tileNum;
 	bool leftPushed, rightPushed;
+
+	bool rectangleCollision(Player *_r1, ZeroIScene *_r2);
 public:
 	ZeroSprite *tile, * border;
 
 	Player *player;
+
+	RECT R1, R2, temp;
 public:
 	Tile(Player *_player, int no);
 	~Tile();

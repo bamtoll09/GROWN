@@ -2,16 +2,25 @@
 #include "Ladder.h"
 
 
-Ladder::Ladder(Player *_player)
+Ladder::Ladder(int no)
 {
-	player = _player;
+	ladderNum = no;
 
-	ladder = new ZeroSprite("");
+	switch (ladderNum)
+	{
+	case 0:
+		ladder = new ZeroSprite("Texture/Ladder/ladder0.png");
+		break;
+
+	case 1:
+		ladder = new ZeroSprite("Texture/Ladder/ladder.png");
+		break;
+	}
+
 	SetWidth(ladder->Width());
 	SetHeight(ladder->Height());
 	PushScene(ladder);
 }
-
 
 Ladder::~Ladder()
 {

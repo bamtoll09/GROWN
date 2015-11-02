@@ -4,11 +4,12 @@
 
 class Ladder : public ZeroIScene
 {
+private:
+	int ladderNum;
 public:
 	ZeroSprite *ladder;
-	Player *player;
 public:
-	Ladder(Player *_player);
+	Ladder(int no);
 	~Ladder();
 
 	virtual void Update(float eTime);

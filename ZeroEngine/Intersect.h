@@ -9,9 +9,10 @@ private:
 	bool state, circle;
 public:
 	ZeroIScene *r1, *r2;
+	ZeroSprite *r3;
 	ZeroInputManager *cursor;
 public:
-	Intersect(ZeroIScene *_r1, ZeroIScene *_r2, bool _Circle = false, ZeroInputManager *_in = NULL);
+	Intersect(ZeroIScene *_r1 = NULL, ZeroIScene *_r2 = NULL, ZeroSprite *_r3 = NULL, bool _Circle = false, ZeroInputManager *_in = NULL);
 	~Intersect(void);
 
 	virtual void Update(float eTime);
@@ -23,5 +24,5 @@ public:
 
 	bool rectangleCollision(ZeroIScene *_r1, ZeroIScene *_r2);
 	bool circleCollision(ZeroIScene *_r1, ZeroIScene *_r2);
-	bool cursorCollision(RECT _r1, ZeroIScene *_r2);
+	bool cursorCollision(RECT *_r1, ZeroSprite *_r2);
 };

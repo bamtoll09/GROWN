@@ -6,28 +6,41 @@
 Item::Item(int no)
 	:itemNum(0), jumpOn(false), shootOn(false), reverseOn(false), doubleJumpOn(false), smallOn(false)
 {
+	f = fopen("Save\\save.dat", "r");
+
+	for (int i = 0; i < 6; i++)
+		fscanf(f, "%d", &save[i]);
+
+	fclose(f);
+
+	loadSaveFile();
+
 	this -> itemNum = no;
 
 	switch (itemNum)
 	{
 	case 1: // Jobject
-		item = new ZeroSprite("Texture/Item/JumpBook.png");
+		item = new ZeroSprite("Texture/Item/bookS1.png");
 		break;
 
 	case 2: // Bobject
-		item = new ZeroSprite("exresource/GObject.jpg");
+		item = new ZeroSprite("Texture/Item/bookS2.png");
 		break;
 
 	case 3: // Robject
-		item = new ZeroSprite("exresource/RObject.jpg");
+		item = new ZeroSprite("Texture/Item/bookS3.png");
 		break;
 
 	case 4: // DJobject
-		item = new ZeroSprite("exresource/DJObject.jpg");
+		item = new ZeroSprite("Texture/Item/bookS4.png");
 		break;
 
 	case 5: // Sobject
-		item = new ZeroSprite("exresource/peanutMushroom.png");
+		item = new ZeroSprite("Texture/Item/bookS5.png");
+		break;
+
+	case 6:
+		item = new ZeroSprite("");
 		break;
 	}
 
@@ -45,8 +58,11 @@ void Item::Update(float eTime)
 {
 	ZeroIScene::Update(eTime);
 
-	if (jumpOn || shootOn || reverseOn || doubleJumpOn || smallOn)
+	if (jumpOn || shootOn || reverseOn || doubleJumpOn || smallOn || theWorldOn)
 		this->SetErase(true);
+
+	loadSaveFile();
+	saveFile();
 }
 
 void Item::Render()
@@ -80,6 +96,11 @@ bool Item::isSmallOn()
 	return this->smallOn;
 }
 
+bool Item::isTheWorldOn()
+{
+	return this->theWorldOn;
+}
+
 
 
 void Item::isJumpOn(bool tf)
@@ -106,4 +127,41 @@ void Item::isDoubleJumpOn(bool tf)
 void Item::isSmallOn(bool tf)
 {
 	smallOn = tf;
+}
+
+void Item::isTheWorldOn(bool tf)
+{
+	theWorldOn = tf;
+}
+
+void Item::loadSaveFile()
+{
+	if (save[0] == 1)
+		jumpOn = true;
+	if (save[1] == 1)
+		shootOn = true;
+	if (save[2] == 1)
+		reverseOn = true;
+	if (save[3] == 1)
+		doubleJumpOn = true;
+	if (save[4] == 1)
+		smallOn = true;
+	if (save[5] == 1)
+		theWorldOn = true;
+}
+
+void Item::saveFile()
+{
+	if (jumpOn)
+		save[0] = 1;
+	if (shootOn)
+		save[1] = 1;
+	if (reverseOn)
+		save[2] = 1;
+	if (doubleJumpOn)
+		save[3] = 1;
+	if (smallOn)
+		save[4] = 1;
+	if (theWorldOn)
+		save[5] = 1;
 }

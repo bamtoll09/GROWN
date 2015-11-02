@@ -1,11 +1,11 @@
 #pragma once
 #include <Zero.h>
-#include "Çì´õ.h"
+#include "Object.h"
 
 class StartScene : public ZeroIScene
 {
 private:
-	int i, _i, db;
+	int i, _i, db, save[7];
 	float bulletTime, r1_x, r1_y, r2_x, r2_y, l, theWorld;
 	float speed;
 	float SeTime;
@@ -14,6 +14,7 @@ private:
 	bool isTheWorlded;
 
 	void PushBullet(float x, float y);
+	bool rectangleCollision(Player *_r1, ZeroIScene *_r2);
 	void tileCollision(Player *_r1, Tile *_r2);
 private:
 	ZeroInputManager *in;
@@ -24,12 +25,13 @@ private:
 
 	Player *m_pPlayer;
 	Bullet *bullet[5];
+	Item *jItem;
 	Ladder *ladder;
 	Door *door[5];
-	Tile *border[1500];
 	MapMaker *start;
 
 	RECT R1, R2, temp, LEFT, RIGHT;
+	FILE *f;
 public:
 	StartScene();
 	~StartScene();

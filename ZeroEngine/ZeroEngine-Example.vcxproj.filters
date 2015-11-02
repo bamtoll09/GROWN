@@ -73,6 +73,9 @@
     <Filter Include="Map">
       <UniqueIdentifier>{9c80bf64-1ceb-4013-8f9c-9a7a60c21596}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SaveFile">
+      <UniqueIdentifier>{72aa2cd1-d169-4448-bbc3-81eb0a4adcdf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\ZeroEngine\ZeroEngine\stdafx.h">
@@ -92,9 +95,6 @@
     </ClInclude>
     <ClInclude Include="Switch.h">
       <Filter>Custom\Switch</Filter>
-    </ClInclude>
-    <ClInclude Include="헤더.h">
-      <Filter>Precompiled Code</Filter>
     </ClInclude>
     <ClInclude Include="Box.h">
       <Filter>Custom\Box</Filter>
@@ -132,6 +132,19 @@
     <ClInclude Include="StartScene.h">
       <Filter>Scene\GameScene\StartScene</Filter>
     </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Precompiled Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Precompiled Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage1_1.h">
+      <Filter>Scene\GameScene\1-1</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage1_2.h">
+      <Filter>Scene\GameScene\1-2</Filter>
+    </ClInclude>
+    <ClInclude Include="MainScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -183,6 +196,13 @@
     <ClCompile Include="StartScene.cpp">
       <Filter>Scene\GameScene\StartScene</Filter>
     </ClCompile>
+    <ClCompile Include="Stage1_1.cpp">
+      <Filter>Scene\GameScene\1-1</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage1_2.cpp">
+      <Filter>Scene\GameScene\1-2</Filter>
+    </ClCompile>
+    <ClCompile Include="MainScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Texture\icon.ico">
@@ -200,6 +220,9 @@
     </None>
     <None Include="Map\start.dat">
       <Filter>Map</Filter>
+    </None>
+    <None Include="Save\save.dat">
+      <Filter>SaveFile</Filter>
     </None>
   </ItemGroup>
 </Project>

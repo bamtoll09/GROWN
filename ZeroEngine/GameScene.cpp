@@ -23,7 +23,7 @@ GameScene::GameScene(void)
 	TW = new ZeroSprite("Texture/theWorld/TheWorldTimeStop.png");
 	GRAY = new ZeroSprite("Texture/theWorld/gray.png");
 
-	sound->PushSound("Sound/theWorld.wav", "ざわ?るど");
+	sound->PushSound("Sound/zawarudo.wav", "ざわ?るど");
 	sound->PushSound("Sound/count(1~3).mp3", "countdown");
 	sound->PushSound("Sound/ORA.mp3", "ORA");
 
@@ -76,7 +76,7 @@ GameScene::GameScene(void)
 	sItem->SetPos(1100, 600);
 	PushScene(sItem);
 
-	switcH = new Switch(1); // 스위치 초기 설정
+	switcH = new Switch(m_pPlayer, 1); // 스위치 초기 설정
 	switcH->SetPos(10, app->GetWindowHeight() - switcH->body->Height());
 	PushScene(switcH);
 

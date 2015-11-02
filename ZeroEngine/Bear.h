@@ -5,13 +5,16 @@ class Bear :
 	public ZeroIScene
 {
 private:
-	float speed;
-	bool left, moving, shooting, dying;
+	int save[7];
+	float speed, time, JeTime, GeTime, jumpH;
+	bool left, moving, jumping, shooting, dying, falling;
 
 	void Move(float _dx);
 public:
 	ZeroSprite *normal, *footPrint;
 	ZeroAnimation *move, *down;
+
+	FILE *f;
 public:
 	Bear();
 	~Bear();
